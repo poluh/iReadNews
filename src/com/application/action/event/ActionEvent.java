@@ -4,17 +4,14 @@ import com.application.App;
 import com.application.file.WorkFile;
 import com.application.news.GetNews;
 import com.application.news.News;
-import com.application.text.filter.wrap.WrapText;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,7 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.Objects;
 
 
 public class ActionEvent {
@@ -31,11 +28,15 @@ public class ActionEvent {
     private static double width = 400;
     private static double height = 800;
 
+
+    // Action event for button on main window
+    // Created window with news
     public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText) {
-        btn.setOnAction((javafx.event.ActionEvent event) ->  {
+        btn.setOnAction((javafx.event.ActionEvent event) -> {
 
             try {
-                WorkFile.addRSSLink(rssText.getText());
+                if (!Objects.equals(btn.getText(), rssText.getText()))
+                    WorkFile.addRSSLink(rssText.getText());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,7 +59,7 @@ public class ActionEvent {
             originPane.setContent(grid);
             originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-            Scene scene = new Scene(originPane, width + 100, height);
+            Scene scene = new Scene(originPane, width + 50, height);
             newsStage.setScene(scene);
             newsStage.show();
 
@@ -66,17 +67,25 @@ public class ActionEvent {
         });
     }
 
-    public static void buttonEvent(Button button, String RSSLink, Stage primaryStage, List<String> file) {
-        button.setOnAction((javafx.event.ActionEvent event) ->  {
+    // Active event for button "Add RSS" in subtract window and button "X"
+    public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage) {
+        button.setOnAction((javafx.event.ActionEvent event) -> {
             try {
-                WorkFile.addRSSLink(RSSLink);
+                if (!Objects.equals(button.getText(), "X")) {
+                    WorkFile.addRSSLink(RSSLink.getText());
+                } else WorkFile.deleteRSSLink(RSSLink.getText());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            App.createRSSLinksWindow(primaryStage, file);
+            try {
+                App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
+    // Create news-window
     private static void createObjects(GridPane grid, String RSSLink) {
 
         List<News> newsList = GetNews.getNews(RSSLink);

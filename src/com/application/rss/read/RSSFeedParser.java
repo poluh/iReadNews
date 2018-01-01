@@ -96,7 +96,10 @@ public class RSSFeedParser {
                 }
             }
         } catch (XMLStreamException e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Runtime error.");
+            alert.setContentText("Sorry.\nServer is not responding\n");
+            alert.showAndWait();
         }
         return feed;
     }

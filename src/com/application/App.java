@@ -43,7 +43,10 @@ public class App extends Application {
 
         createObjects(grid, primaryStage, file);
 
-        Scene scene = new Scene(grid, 400, 400);
+        ScrollPane scrollPane = new ScrollPane(grid);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        Scene scene = new Scene(scrollPane, 400, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -62,6 +65,7 @@ public class App extends Application {
 
     }
 
+    // This method created object for start window
     private static void createObjects(GridPane grid, Stage primaryStage) {
 
         // Main Title
@@ -95,39 +99,46 @@ public class App extends Application {
 
     }
 
+    // This methods created obj for base window, after added links RSS
     private static void createObjects(GridPane grid, Stage primaryStage, List<String> RSSlinks) {
 
         Label title = new Label("You RSS links:");
         title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(title, 0, 0);
-        ScrollPane scrollPane = new ScrollPane();
 
         int i = 1;
         for (String link : RSSlinks) {
-            Button btn = new Button(link);
-            TextField textField = new TextField(link);
-            ActionEvent.buttonEvent(btn, primaryStage, textField);
+            if (!link.matches("\\s+")) {
+                Button btn = new Button(link);
+                TextField textField = new TextField(link);
+                ActionEvent.buttonEvent(btn, primaryStage, textField);
 
-            btn.autosize();
-            HBox hbBtn = new HBox(10);
-            hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-            hbBtn.getChildren().add(btn);
-            grid.add(hbBtn, 0, i);
-            i++;
+                btn.autosize();
+                HBox hbBtn = new HBox(10);
+                hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+                hbBtn.getChildren().add(btn);
+                grid.add(hbBtn, 0, i);
+
+                Button btnDel = new Button("X");
+                ActionEvent.buttonEvent(btnDel, new TextField(link), primaryStage);
+
+                btnDel.autosize();
+                HBox hbBtnDel = new HBox(10);
+                hbBtnDel.setAlignment(Pos.BOTTOM_LEFT);
+                hbBtnDel.getChildren().add(btnDel);
+                grid.add(hbBtnDel, 1, i);
+                i++;
+            }
         }
-
         TextField rssField = new TextField();
         grid.add(rssField, 0, i + 1);
 
         Button addRSSLink = new Button("Add RSS.");
-        ActionEvent.buttonEvent(addRSSLink, rssField.getText(), primaryStage, RSSlinks);
+        ActionEvent.buttonEvent(addRSSLink, rssField, primaryStage);
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(addRSSLink);
         grid.add(hbBtn, 1, i + 1);
-
-
-        scrollPane.setContent(grid);
 
     }
 

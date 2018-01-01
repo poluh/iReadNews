@@ -2,6 +2,7 @@ package com.application.rss.read;
 
 import com.application.rss.model.Feed;
 import com.application.rss.model.FeedMessage;
+import javafx.scene.control.Alert;
 
 import javax.xml.stream.*;
 import javax.xml.stream.events.*;
@@ -15,13 +16,16 @@ public class RSSFeedParser {
             LANGUAGE = "language", COPYRIGHT = "copyright", LINK = "link", AUTHOR = "author",
             ITEM = "item", PUB_DATE = "pubDate", GUID = "guid";
 
-    private final URL url;
+    private URL url;
 
     public RSSFeedParser(String feedUrl) {
         try {
             this.url = new URL(feedUrl);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("RSS not found. (" + url + ")");
+            alert.setContentText("Sorry.\nUnfortunately, we could not find the specified RSS-feed.");
+            alert.showAndWait();
         }
     }
 

@@ -1,15 +1,29 @@
 package com.application.news;
 
-import com.application.rss.model.Feed;
-import com.application.rss.read.RSSFeedParser;
-
 public class News {
 
-    News() {
-        RSSFeedParser parser = new RSSFeedParser("https://news.yandex.ru/Saint_Petersburg/index.rss");
-        Feed feed = parser.readFeed();
-        String title = feed.getTitle(), description = feed.getDescription(),
-                link = feed.getLink(), date = feed.getPubDate();
+    final private String title, description, link, date;
+
+    News(String title, String description, String link, String date) {
+        this.title = title;
+        this.description = description;
+        this.link = link;
+        this.date = date;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }

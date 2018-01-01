@@ -2,7 +2,7 @@ package com.application.rss.model;
 
 public class FeedMessage {
 
-    private String title, description, link, author, guid;
+    private String title, description, link, author, guid, date;
 
     public String getTitle() {
         return title;
@@ -44,12 +44,21 @@ public class FeedMessage {
         this.guid = guid;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "FeedMessage [title=" + title + ", description=" + description
                 + ", link=" + link + ", author=" + author + ", guid=" + guid
                 + "]";
     }
+
 
 }
 

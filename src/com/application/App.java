@@ -2,18 +2,11 @@ package com.application;
 
 import com.application.action.event.ActionEvent;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 
 
@@ -51,8 +44,8 @@ public class App extends Application {
         Label rssLink = new Label("Enter RSS-link:");
         grid.add(rssLink, 0, 2);
 
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 2);
+        TextField rssText = new TextField();
+        grid.add(rssText, 1, 2);
 
         Label pw = new Label("Password:\n(Can be empty)");
         grid.add(pw, 0, 3);
@@ -66,7 +59,7 @@ public class App extends Application {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 5);
 
-        ActionEvent.buttonEvent(btn, primaryStage);
+        ActionEvent.buttonEvent(btn, primaryStage, rssText);
 
     }
 

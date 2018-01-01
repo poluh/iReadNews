@@ -3,15 +3,10 @@ package com.application.rss.read;
 import com.application.rss.model.Feed;
 import com.application.rss.model.FeedMessage;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.XMLEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+import javax.xml.stream.*;
+import javax.xml.stream.events.*;
+import java.io.*;
+import java.net.*;
 import java.util.Objects;
 
 public class RSSFeedParser {
@@ -34,18 +29,14 @@ public class RSSFeedParser {
         Feed feed = null;
         try {
             boolean isFeedHeader = true;
+
             // Set header values intial to the empty string
-            String description = "";
-            String title = "";
-            String link = "";
-            String language = "";
-            String copyright = "";
-            String author = "";
-            String pubdate = "";
-            String guid = "";
+            String description = "", title = "", link = "", language = "",
+                    copyright = "", author = "", pubdate = "", guid = "";
 
             // First create a new XMLInputFactory
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
             // Setup a new eventReader
             InputStream in = read();
             XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
@@ -98,7 +89,6 @@ public class RSSFeedParser {
                         message.setLink(link);
                         message.setTitle(title);
                         feed.getMessages().add(message);
-                        event = eventReader.nextEvent();
                     }
                 }
             }

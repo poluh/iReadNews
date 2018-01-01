@@ -33,6 +33,7 @@ public class App extends Application {
     }
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
+        primaryStage.close();
         primaryStage.setTitle("Your RSS links.");
 
         GridPane grid = new GridPane();
@@ -110,13 +111,15 @@ public class App extends Application {
         for (String link : RSSlinks) {
             if (!link.matches("\\s+")) {
                 Button btn = new Button(link);
+                btn.setMaxSize(250, 20);
+                btn.setMinSize(250, 30);
                 TextField textField = new TextField(link);
                 ActionEvent.buttonEvent(btn, primaryStage, textField);
 
-                btn.autosize();
                 HBox hbBtn = new HBox(10);
                 hbBtn.setAlignment(Pos.BOTTOM_LEFT);
                 hbBtn.getChildren().add(btn);
+
                 grid.add(hbBtn, 0, i);
 
                 Button btnDel = new Button("X");

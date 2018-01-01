@@ -2,25 +2,17 @@ package com.application.action.event;
 
 import com.application.App;
 import com.application.file.WorkFile;
-import com.application.news.GetNews;
-import com.application.news.News;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import com.application.news.*;
+import javafx.geometry.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class ActionEvent {
@@ -52,7 +44,7 @@ public class ActionEvent {
             grid.setVgap(15);
             grid.setMaxSize(width, height);
 
-            createObjects(grid, rssText.getText());
+            createObjects(grid, rssText.getText(), primaryStage);
 
 
             ScrollPane originPane = new ScrollPane();
@@ -85,12 +77,39 @@ public class ActionEvent {
         });
     }
 
+    private static void saveNews(Button button) {
+
+    }
+
+    private static void toBack(Button button, Stage primaryStage)  {
+        button.setOnAction((javafx.event.ActionEvent event) -> {
+            try {
+                App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     // Create news-window
-    private static void createObjects(GridPane grid, String RSSLink) {
+    private static void createObjects(GridPane grid, String RSSLink, Stage primaryStage) {
 
         List<News> newsList = GetNews.getNews(RSSLink);
 
         int i = 0;
+
+        Button saveNews = new Button("Save this news");
+        saveNews(saveNews);
+        Button back = new Button("Back to links");
+        toBack(back, primaryStage);
+
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_CENTER);
+        hbBtn.getChildren().addAll(saveNews, back);
+        hbBtn.autosize();
+        grid.add(hbBtn, 0, i);
+        i++;
+
         for (News news : newsList) {
             Text newsTitle = new Text(news.getTitle());
             newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));

@@ -1,5 +1,7 @@
 package com.application.action.event;
 
+import com.application.App;
+import com.application.file.WorkFile;
 import com.application.news.GetNews;
 import com.application.news.News;
 import com.application.text.filter.wrap.WrapText;
@@ -12,12 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -29,6 +33,12 @@ public class ActionEvent {
 
     public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText) {
         btn.setOnAction((javafx.event.ActionEvent event) ->  {
+
+            try {
+                WorkFile.addRSSLink(rssText.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             Stage newsStage = new Stage();
 
@@ -53,6 +63,17 @@ public class ActionEvent {
             newsStage.show();
 
             primaryStage.close();
+        });
+    }
+
+    public static void buttonEvent(Button button, String RSSLink, Stage primaryStage, List<String> file) {
+        button.setOnAction((javafx.event.ActionEvent event) ->  {
+            try {
+                WorkFile.addRSSLink(RSSLink);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            App.createRSSLinksWindow(primaryStage, file);
         });
     }
 

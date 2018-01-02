@@ -77,8 +77,10 @@ public class ActionEvent {
             ScrollPane originPane = new ScrollPane();
             originPane.setContent(grid);
             originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
             Scene scene = new Scene(originPane, width + 50, height);
+            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
             newsStage.setScene(scene);
             newsStage.show();
 
@@ -89,6 +91,7 @@ public class ActionEvent {
     // Active event for button "Add RSS" in subtract window and button "X"
     public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
+
             try {
                 if (!Objects.equals(button.getText(), "X")) {
                     WorkFile.addRSSLink(RSSLink.getText());
@@ -116,14 +119,14 @@ public class ActionEvent {
         });
     }
 
-    private static void saveNews(Label label, String newsLink, String newsName) {
-        label.setOnMouseClicked(event -> {
+    private static void saveNews(Button button, String newsLink, String newsName) {
+        button.setOnMouseClicked(event -> {
             SaveNews.saveNews(newsLink, newsName);
         });
     }
 
-    private static void openNew(Label label, String link) {
-        label.setOnMouseClicked(event -> {
+    private static void openNew(Button button, String link) {
+        button.setOnMouseClicked(event -> {
             WebView browser = new WebView();
             WebEngine webEngine = browser.getEngine();
             webEngine.load(link);
@@ -135,6 +138,7 @@ public class ActionEvent {
             root.getChildren().addAll(browser);
 
             Scene scene = new Scene(root);
+            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
 
             newStage.setTitle("More info for new!");
             newStage.setScene(scene);
@@ -183,15 +187,15 @@ public class ActionEvent {
             Text newsDescription = new Text(news.getDescription());
             newsDescription.setWrappingWidth(width);
 
-            Label newsDate = new Label(news.getDate());
+            Button newsDate = new Button(news.getDate());
             newsDate.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
-            Label newsLink = new Label("More info...");
+            Button newsLink = new Button("More info...");
             newsLink.setTextFill(Color.BLUE);
 
             openNew(newsLink, news.getLink());
 
-            Label newsSave = new Label("Save this new!");
+            Button newsSave = new Button("Save this new!");
             newsSave.setTextFill(Color.RED);
             newsSave.setAlignment(Pos.BOTTOM_RIGHT);
             saveNews(newsSave, news.getLink(), news.getTitle());

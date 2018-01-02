@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 
 public class SaveNews extends Component {
 
@@ -36,7 +37,7 @@ public class SaveNews extends Component {
             }
             BWriter.close();
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("New saved!");
             alert.setContentText("Congratulations!\nNews saved!");
             alert.showAndWait();
@@ -59,18 +60,19 @@ public class SaveNews extends Component {
         if (file != null) {
 
             String url = file.toURI().toString();
-            String os = System.getProperty("os.name").toLowerCase(); // получаем имя операционной системы
+            String os = System.getProperty("os.name").toLowerCase();
             Runtime rt = Runtime.getRuntime();
             try {
                 if (os.contains("win")) {
-                    // не поддерживаются ссылки формата "leodev.html#someTag"
-                    rt.exec("rundll32 url.dll,FileProtocolHandler " + url); // если windows, открываем урлу через командную строку
+
+                    rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
                 } else if (os.contains("mac")) {
-                    rt.exec("open " + url); // аналогично в MAC
+                    rt.exec("open " + url);
                 } else {
                     if (os.contains("nix") || os.contains("nux")) {
 
-                        String[] browsers = {"epiphany", "firefox", "mozilla", "konqueror", "netscape", "opera", "links", "lynx"};
+                        String[] browsers = {"epiphany", "firefox", "mozilla",
+                                "konqueror", "netscape", "opera", "links", "lynx"};
 
                         // "browser0 "URI" || browser1 "URI" ||..."
                         StringBuilder cmd = new StringBuilder();

@@ -1,0 +1,54 @@
+
+
+.label {
+    -fx-opacity: 0.6;
+}
+
+
+.text-field {
+    -fx-font-size: 12pt;
+}
+
+.button {
+
+    -fx-border-color: #ededed;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-background-radius: 30;
+    -fx-background-color: #fafafa;
+    -fx-font-family: "Segoe UI", Helvetica, sans-serif;
+    -fx-text-fill: #02547D;
+
+}
+
+.button:hover {
+    -fx-background-color: #0284A8;
+    -fx-border-color: #0284A8;
+    -fx-text-fill: #f5f5f5;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: #ededed;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+
+}

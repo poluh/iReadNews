@@ -24,6 +24,8 @@ import java.util.List;
 
 public class App extends Application {
 
+    public static String PATH_TO_STYLE = "style/style.css";
+
     private static void createStartWindow(Stage primaryStage) {
         primaryStage.setTitle("News");
 
@@ -36,6 +38,7 @@ public class App extends Application {
         createObjects(grid, primaryStage);
 
         Scene scene = new Scene(grid, 400, 400);
+        scene.getStylesheets().add(PATH_TO_STYLE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -45,17 +48,18 @@ public class App extends Application {
         primaryStage.setTitle("Your RSS links.");
 
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
+        grid.setAlignment(Pos.BOTTOM_RIGHT);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setPadding(new Insets(25));
 
         createObjects(grid, primaryStage, file);
 
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        Scene scene = new Scene(scrollPane, 400, 400);
+        Scene scene = new Scene(scrollPane, 350, 400);
+        scene.getStylesheets().add(PATH_TO_STYLE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -100,8 +104,10 @@ public class App extends Application {
         for (String link : RSSlinks) {
             if (!link.matches("\\s+")) {
                 Button buttonTitleNewsPortal = new Button(new FeedNews(link).getTitleString());
-                buttonTitleNewsPortal.setMaxSize(250, 20);
                 buttonTitleNewsPortal.setMinSize(250, 30);
+                buttonTitleNewsPortal.setMaxWidth(250);
+                buttonTitleNewsPortal.setWrapText(true);
+
                 TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
                 ActionEvent.buttonEvent(buttonTitleNewsPortal, primaryStage, textField);
 
@@ -113,13 +119,12 @@ public class App extends Application {
                 buttonForDelNewsPortal.setMinSize(30, 30);
                 ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage);
 
-                buttonForDelNewsPortal.autosize();
                 HBox hbBtnDel = new HBox(10);
-                hbBtnDel.setAlignment(Pos.BOTTOM_LEFT);
+                hbBtnDel.setAlignment(Pos.CENTER_LEFT);
                 hbBtnDel.getChildren().add(buttonForDelNewsPortal);
 
                 GridPane miniGrid = new GridPane();
-                miniGrid.setHgap(20);
+                miniGrid.setHgap(10);
                 miniGrid.add(hbBtn, 0, 0);
                 miniGrid.add(hbBtnDel, 1, 0);
 
@@ -130,21 +135,24 @@ public class App extends Application {
         }
         TextField rssField = new TextField();
         rssField.setAlignment(Pos.BOTTOM_LEFT);
+        rssField.setMaxWidth(290);
 
         Button addRSSLink = new Button("Add RSS.");
+        addRSSLink.setMinWidth(290);
         ActionEvent.buttonEvent(addRSSLink, rssField, primaryStage);
         HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
         hbBtn.getChildren().add(addRSSLink);
 
         Button openSaveNews = new Button("Open the saved news!");
+        openSaveNews.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
         ActionEvent.openNews(openSaveNews, primaryStage);
         HBox hbOSN = new HBox(10);
         hbOSN.setAlignment(Pos.BOTTOM_LEFT);
         hbOSN.getChildren().add(openSaveNews);
 
-
-        Button delAll = new Button("Delete all saved news");
+        Button delAll = new Button("Delete all saved news.");
+        delAll.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
         ActionEvent.deleteAllNews(delAll);
         HBox hbDA = new HBox(10);
         hbDA.setAlignment(Pos.BOTTOM_RIGHT);
@@ -153,17 +161,15 @@ public class App extends Application {
         GridPane miniGrid = new GridPane();
         miniGrid.setHgap(10);
         miniGrid.setVgap(10);
+        miniGrid.setMaxWidth(290);
 
-        miniGrid.add(rssField, 0, 1);
-        miniGrid.add(hbBtn, 1, 1);
-        miniGrid.add(hbOSN, 0, 2);
-        miniGrid.add(hbDA, 1, 2);
+        miniGrid.add(rssField, 0, 1, 2, 1);
+        miniGrid.add(hbBtn, 0, 2, 2, 1);
+        miniGrid.add(hbOSN, 0, 3);
+        miniGrid.add(hbDA, 1, 3);
+        miniGrid.setAlignment(Pos.CENTER);
 
-        grid.add(miniGrid, 0, i + 1);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        grid.add(miniGrid, 0, i + 2);
     }
 
     @Override
@@ -175,8 +181,10 @@ public class App extends Application {
             List<String> RSSLinks = WorkFile.listRSSLinks();
             createRSSLinksWindow(primaryStage, RSSLinks);
         }
+    }
 
-
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }

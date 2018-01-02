@@ -56,7 +56,7 @@ public class WorkFile {
     }
 
     public static String normalizedName(String newsName) {
-        return newsName.substring(0, 15).replace(" ", "");
+        return newsName.substring(0, 20).replace(" ", "-");
     }
 
 

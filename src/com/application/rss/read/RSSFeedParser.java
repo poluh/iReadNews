@@ -4,10 +4,15 @@ import com.application.rss.model.Feed;
 import com.application.rss.model.FeedMessage;
 import javafx.scene.control.Alert;
 
-import javax.xml.stream.*;
-import javax.xml.stream.events.*;
-import java.io.*;
-import java.net.*;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.XMLEvent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 public class RSSFeedParser {
@@ -118,7 +123,11 @@ public class RSSFeedParser {
         try {
             return url.openStream();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Runtime error.");
+            alert.setContentText("Sorry.\nServer is not responding\n");
+            alert.showAndWait();
         }
+        return null;
     }
 }

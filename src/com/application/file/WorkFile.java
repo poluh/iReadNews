@@ -1,7 +1,8 @@
 package com.application.file;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkFile {
 
@@ -52,6 +53,10 @@ public class WorkFile {
         writer.close();
         sourceFile.delete();
         outputFile.renameTo(sourceFile);
+    }
+
+    public static String normalizedName(String newsName) {
+        return newsName.substring(0, 15).replace(" ", "");
     }
 
 

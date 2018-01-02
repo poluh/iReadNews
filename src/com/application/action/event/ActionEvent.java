@@ -2,17 +2,30 @@ package com.application.action.event;
 
 import com.application.App;
 import com.application.file.WorkFile;
-import com.application.news.*;
-import javafx.geometry.*;
+import com.application.news.GetNews;
+import com.application.news.News;
+import com.application.news.SaveNews;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 
 public class ActionEvent {
@@ -27,8 +40,11 @@ public class ActionEvent {
         btn.setOnAction((javafx.event.ActionEvent event) -> {
 
             try {
-                if (!Objects.equals(btn.getText(), rssText.getText()))
-                    WorkFile.addRSSLink(rssText.getText());
+                String title = rssText.getText().substring(rssText.getText().indexOf(":/LINK/:") + 8);
+                String link = rssText.getText().substring(0, rssText.getText().indexOf(":/LINK/:"));
+
+                if (!Objects.equals(btn.getText(), title))
+                    WorkFile.addRSSLink(link);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,7 +60,8 @@ public class ActionEvent {
             grid.setVgap(15);
             grid.setMaxSize(width, height);
 
-            createObjects(grid, rssText.getText(), primaryStage);
+            createObjects(grid, rssText.getText().substring(0,
+                    rssText.getText().indexOf(":/LINK/:")), primaryStage);
 
 
             ScrollPane originPane = new ScrollPane();
@@ -77,17 +94,41 @@ public class ActionEvent {
         });
     }
 
-    private static void saveNews(Button button) {
 
-    }
 
-    private static void toBack(Button button, Stage primaryStage)  {
+    private static void toBack(Button button, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
             try {
                 App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    private static void saveNews(Label label, String newsLink, String newsName) {
+        label.setOnMouseClicked(event -> {
+            SaveNews.saveNews(newsLink, newsName);
+        });
+    }
+
+    private static void openNew(Label label, String link) {
+        label.setOnMouseClicked(event -> {
+            WebView browser = new WebView();
+            WebEngine webEngine = browser.getEngine();
+            webEngine.load(link);
+
+            Stage newStage = new Stage();
+            VBox root = new VBox();
+            root.setPadding(new Insets(5));
+            root.setSpacing(5);
+            root.getChildren().addAll(browser);
+
+            Scene scene = new Scene(root);
+
+            newStage.setTitle("More info for new!");
+            newStage.setScene(scene);
+            newStage.show();
         });
     }
 
@@ -98,19 +139,19 @@ public class ActionEvent {
 
         int i = 0;
 
-        Button saveNews = new Button("Save this news");
-        saveNews(saveNews);
         Button back = new Button("Back to links");
         toBack(back, primaryStage);
 
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_CENTER);
-        hbBtn.getChildren().addAll(saveNews, back);
+        hbBtn.getChildren().addAll(back);
         hbBtn.autosize();
         grid.add(hbBtn, 0, i);
-        i++;
+
+        i += 2;
 
         for (News news : newsList) {
+
             Text newsTitle = new Text(news.getTitle());
             newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             newsTitle.setWrappingWidth(width);
@@ -124,10 +165,22 @@ public class ActionEvent {
             Label newsLink = new Label("More info...");
             newsLink.setTextFill(Color.BLUE);
 
+            openNew(newsLink, news.getLink());
+
+            Label newsSave = new Label("Save this new!");
+            newsSave.setTextFill(Color.RED);
+            newsSave.setAlignment(Pos.BOTTOM_RIGHT);
+            saveNews(newsSave, news.getLink(), news.getTitle());
+
+            GridPane miniGrid = new GridPane();
+            miniGrid.setHgap(20);
+
+            miniGrid.add(newsLink, 0, 0);
+            miniGrid.add(newsSave, 1, 0);
 
             grid.add(newsTitle, 0, i, 2, 1);
             grid.add(newsDescription, 0, i + 1);
-            grid.add(newsLink, 0, i + 2, 2, 1);
+            grid.add(miniGrid, 0, i + 2, 2, 1);
 
             i += 3;
         }

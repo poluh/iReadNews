@@ -1,13 +1,21 @@
 package com.application;
 
 import com.application.action.event.ActionEvent;
-import com.application.file.*;
+import com.application.file.WorkFile;
+import com.application.news.FeedNews;
 import javafx.application.Application;
-import javafx.geometry.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -52,20 +60,6 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-
-        if (!WorkFile.checkFile()) {
-            createStartWindow(primaryStage);
-        }
-        else {
-            List<String> RSSLinks = WorkFile.listRSSLinks();
-            createRSSLinksWindow(primaryStage, RSSLinks);
-        }
-
-
-    }
-
     // This method created object for start window
     private static void createObjects(GridPane grid, Stage primaryStage) {
 
@@ -75,7 +69,8 @@ public class App extends Application {
         grid.add(sceneTitle, 0, 0, 3, 1);
 
         // If user do first entry
-        Text simpleTitle = new Text("It looks like you have never been here before.");
+        Text simpleTitle = new Text("It looks like you have never been here before.\n" +
+                "Enter any link to start");
         grid.add(simpleTitle, 0, 1, 2, 1);
 
         Label rssLink = new Label("Enter RSS-link:");
@@ -83,12 +78,6 @@ public class App extends Application {
 
         TextField rssText = new TextField();
         grid.add(rssText, 1, 2);
-
-        Label pw = new Label("Password:\n(Can be empty)");
-        grid.add(pw, 0, 3);
-
-        PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 3);
 
         Button btn = new Button("Get news!");
         HBox hbBtn = new HBox(10);
@@ -110,25 +99,26 @@ public class App extends Application {
         int i = 1;
         for (String link : RSSlinks) {
             if (!link.matches("\\s+")) {
-                Button btn = new Button(link);
-                btn.setMaxSize(250, 20);
-                btn.setMinSize(250, 30);
-                TextField textField = new TextField(link);
-                ActionEvent.buttonEvent(btn, primaryStage, textField);
+                Button buttonTitleNewsPortal = new Button(new FeedNews(link).getTitleString());
+                buttonTitleNewsPortal.setMaxSize(250, 20);
+                buttonTitleNewsPortal.setMinSize(250, 30);
+                TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
+                ActionEvent.buttonEvent(buttonTitleNewsPortal, primaryStage, textField);
 
                 HBox hbBtn = new HBox(10);
                 hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-                hbBtn.getChildren().add(btn);
+                hbBtn.getChildren().add(buttonTitleNewsPortal);
 
                 grid.add(hbBtn, 0, i);
 
-                Button btnDel = new Button("X");
-                ActionEvent.buttonEvent(btnDel, new TextField(link), primaryStage);
+                Button buttonForDelNewsPortal = new Button("X");
+                buttonForDelNewsPortal.setMinSize(30, 30);
+                ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage);
 
-                btnDel.autosize();
+                buttonForDelNewsPortal.autosize();
                 HBox hbBtnDel = new HBox(10);
                 hbBtnDel.setAlignment(Pos.BOTTOM_LEFT);
-                hbBtnDel.getChildren().add(btnDel);
+                hbBtnDel.getChildren().add(buttonForDelNewsPortal);
                 grid.add(hbBtnDel, 1, i);
                 i++;
             }
@@ -145,9 +135,21 @@ public class App extends Application {
 
     }
 
-
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+
+        if (!WorkFile.checkFile()) {
+            createStartWindow(primaryStage);
+        } else {
+            List<String> RSSLinks = WorkFile.listRSSLinks();
+            createRSSLinksWindow(primaryStage, RSSLinks);
+        }
+
+
     }
 
 }

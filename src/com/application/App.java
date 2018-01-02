@@ -109,8 +109,6 @@ public class App extends Application {
                 hbBtn.setAlignment(Pos.BOTTOM_LEFT);
                 hbBtn.getChildren().add(buttonTitleNewsPortal);
 
-                grid.add(hbBtn, 0, i);
-
                 Button buttonForDelNewsPortal = new Button("X");
                 buttonForDelNewsPortal.setMinSize(30, 30);
                 ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage);
@@ -119,20 +117,49 @@ public class App extends Application {
                 HBox hbBtnDel = new HBox(10);
                 hbBtnDel.setAlignment(Pos.BOTTOM_LEFT);
                 hbBtnDel.getChildren().add(buttonForDelNewsPortal);
-                grid.add(hbBtnDel, 1, i);
+
+                GridPane miniGrid = new GridPane();
+                miniGrid.setHgap(20);
+                miniGrid.add(hbBtn, 0, 0);
+                miniGrid.add(hbBtnDel, 1, 0);
+
+                grid.add(miniGrid, 0, i);
+
                 i++;
             }
         }
         TextField rssField = new TextField();
-        grid.add(rssField, 0, i + 1);
+        rssField.setAlignment(Pos.BOTTOM_LEFT);
 
         Button addRSSLink = new Button("Add RSS.");
         ActionEvent.buttonEvent(addRSSLink, rssField, primaryStage);
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(addRSSLink);
-        grid.add(hbBtn, 1, i + 1);
 
+        Button openSaveNews = new Button("Open the saved news!");
+        ActionEvent.openNews(openSaveNews, primaryStage);
+        HBox hbOSN = new HBox(10);
+        hbOSN.setAlignment(Pos.BOTTOM_LEFT);
+        hbOSN.getChildren().add(openSaveNews);
+
+
+        Button delAll = new Button("Delete all saved news");
+        ActionEvent.deleteAllNews(delAll);
+        HBox hbDA = new HBox(10);
+        hbDA.setAlignment(Pos.BOTTOM_RIGHT);
+        hbDA.getChildren().add(delAll);
+
+        GridPane miniGrid = new GridPane();
+        miniGrid.setHgap(10);
+        miniGrid.setVgap(10);
+
+        miniGrid.add(rssField, 0, 1);
+        miniGrid.add(hbBtn, 1, 1);
+        miniGrid.add(hbOSN, 0, 2);
+        miniGrid.add(hbDA, 1, 2);
+
+        grid.add(miniGrid, 0, i + 1);
     }
 
     public static void main(String[] args) {

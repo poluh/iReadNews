@@ -24,6 +24,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,15 +39,16 @@ public class ActionEvent {
     // Created window with news
     public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText) {
         btn.setOnAction((javafx.event.ActionEvent event) -> {
+            if (WorkFile.checkFile()) {
+                try {
+                    String title = rssText.getText().substring(rssText.getText().indexOf(":/LINK/:") + 8);
+                    String link = rssText.getText().substring(0, rssText.getText().indexOf(":/LINK/:"));
 
-            try {
-                String title = rssText.getText().substring(rssText.getText().indexOf(":/LINK/:") + 8);
-                String link = rssText.getText().substring(0, rssText.getText().indexOf(":/LINK/:"));
-
-                if (!Objects.equals(btn.getText(), title))
-                    WorkFile.addRSSLink(link);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    if (!Objects.equals(btn.getText(), title))
+                        WorkFile.addRSSLink(link);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             Stage newsStage = new Stage();
@@ -60,9 +62,17 @@ public class ActionEvent {
             grid.setVgap(15);
             grid.setMaxSize(width, height);
 
-            createObjects(grid, rssText.getText().substring(0,
-                    rssText.getText().indexOf(":/LINK/:")), primaryStage);
-
+            try {
+                createObjects(grid, rssText.getText().substring(0,
+                        rssText.getText().indexOf(":/LINK/:")), primaryStage);
+            } catch (StringIndexOutOfBoundsException e) {
+                createObjects(grid, rssText.getText(), primaryStage);
+                try {
+                    WorkFile.addRSSLink(rssText.getText());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
 
             ScrollPane originPane = new ScrollPane();
             originPane.setContent(grid);
@@ -130,6 +140,20 @@ public class ActionEvent {
             newStage.setScene(scene);
             newStage.show();
         });
+    }
+
+    public static void openNews(Button button, Stage primaryStage) {
+        button.setOnAction(event -> {
+            try {
+                SaveNews.openNews(primaryStage);
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void deleteAllNews(Button button) {
+        button.setOnAction(event -> SaveNews.dellAllNews());
     }
 
     // Create news-window

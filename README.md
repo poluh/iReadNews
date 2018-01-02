@@ -8,3 +8,5 @@ How to use the application:
 1. Open it
 2. Connect any RSS-feed
 3. After that you can add and cache any tape and save them!
+
+So it's open source, so you can screw anything here!

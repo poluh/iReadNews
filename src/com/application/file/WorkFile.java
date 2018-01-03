@@ -6,8 +6,10 @@ import java.util.List;
 
 public class WorkFile {
 
-    private static final String FILENAME = "DataBase/RSSDataBase/RSSLinks.txt";
-    private static final String BUFFFILE = "DataBase/RSSDataBase/RSSLinkBUFF.txt";
+    private static final String FILENAME = "RSSLinks.txt";
+    private static final String BUFFFILE = "RSSLinkBUFF.txt";
+    //private static final String FILENAME = "DataBase/RSSDataBase/RSSLinks.txt";
+    //private static final String BUFFFILE = "DataBase/RSSDataBase/RSSLinkBUFF.txt";
 
     public static boolean checkFile() {
         return new File(FILENAME).exists();

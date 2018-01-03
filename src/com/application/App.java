@@ -25,8 +25,12 @@ import java.util.List;
 public class App extends Application {
 
     public static String PATH_TO_STYLE = "style/style.css";
+    private static boolean appWork = false;
 
     private static void createStartWindow(Stage primaryStage) {
+
+        appWork = true;
+
         primaryStage.setTitle("News");
 
         GridPane grid = new GridPane();
@@ -44,6 +48,7 @@ public class App extends Application {
     }
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
+
         primaryStage.close();
         primaryStage.setTitle("Your RSS links.");
 
@@ -60,6 +65,7 @@ public class App extends Application {
 
         Scene scene = new Scene(scrollPane, 350, 400);
         scene.getStylesheets().add(PATH_TO_STYLE);
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -102,7 +108,7 @@ public class App extends Application {
 
         int i = 1;
         for (String link : RSSlinks) {
-            if (!link.matches("\\s+")) {
+            if (!link.matches("\\s+") && !link.isEmpty()) {
                 Button buttonTitleNewsPortal = new Button(new FeedNews(link).getTitleString());
                 buttonTitleNewsPortal.setMinSize(250, 30);
                 buttonTitleNewsPortal.setMaxWidth(250);
@@ -132,6 +138,7 @@ public class App extends Application {
 
                 i++;
             }
+
         }
         TextField rssField = new TextField();
         rssField.setAlignment(Pos.BOTTOM_LEFT);
@@ -170,6 +177,7 @@ public class App extends Application {
         miniGrid.setAlignment(Pos.CENTER);
 
         grid.add(miniGrid, 0, i + 2);
+        grid.impl_updatePeer();
     }
 
     @Override

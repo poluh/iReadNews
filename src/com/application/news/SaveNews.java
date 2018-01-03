@@ -14,6 +14,9 @@ import java.text.DecimalFormat;
 
 public class SaveNews extends Component {
 
+    //private static final String SAVE_DIRECTORY = "SavePages/";
+    private static final String SAVE_DIRECTORY = "";
+
     public static void saveNews(String newsLink, String newsName) {
         try {
             newsName = WorkFile.normalizedName(newsName);
@@ -27,7 +30,7 @@ public class SaveNews extends Component {
 
             InputStreamReader ReadIn = new InputStreamReader(GetConn.getInputStream());
             BufferedReader BufData = new BufferedReader(ReadIn);
-            String htmlFileName = ("SavedPages/" + newsName + ".html");
+            String htmlFileName = (SAVE_DIRECTORY + newsName + ".html");
             FileWriter FWriter = new FileWriter(htmlFileName);
             BufferedWriter BWriter = new BufferedWriter(FWriter);
             String UrlData;

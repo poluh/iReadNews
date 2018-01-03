@@ -9,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -64,9 +63,9 @@ public class ActionEvent {
 
             try {
                 createObjects(grid, rssText.getText().substring(0,
-                        rssText.getText().indexOf(":/LINK/:")), primaryStage);
+                        rssText.getText().indexOf(":/LINK/:")), newsStage);
             } catch (StringIndexOutOfBoundsException e) {
-                createObjects(grid, rssText.getText(), primaryStage);
+                createObjects(grid, rssText.getText(), newsStage);
                 try {
                     WorkFile.addRSSLink(rssText.getText());
                 } catch (IOException e1) {
@@ -91,28 +90,28 @@ public class ActionEvent {
     // Active event for button "Add RSS" in subtract window and button "X"
     public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
-
             try {
-                if (!Objects.equals(button.getText(), "X")) {
+                if (!Objects.equals(button.getText(), "X") && !button.getText().isEmpty()) {
                     WorkFile.addRSSLink(RSSLink.getText());
                 } else WorkFile.deleteRSSLink(RSSLink.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
-            } catch (IOException e) {
-                e.printStackTrace();
+                try {
+                    App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
+                } catch (NullPointerException e) {
+                    WorkFile.deleteRSSLink(RSSLink.getText());
+                    App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
+                }
+            } catch (IOException ignored) {
             }
         });
     }
 
 
-
     private static void toBack(Button button, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
             try {
-                App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks());
+                primaryStage.close();
+                Stage newStage = new Stage();
+                App.createRSSLinksWindow(newStage, WorkFile.listRSSLinks());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,9 +119,7 @@ public class ActionEvent {
     }
 
     private static void saveNews(Button button, String newsLink, String newsName) {
-        button.setOnMouseClicked(event -> {
-            SaveNews.saveNews(newsLink, newsName);
-        });
+        button.setOnMouseClicked(event -> SaveNews.saveNews(newsLink, newsName));
     }
 
     private static void openNew(Button button, String link) {

@@ -10,12 +10,11 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.DecimalFormat;
 
 public class SaveNews extends Component {
 
-    //private static final String SAVE_DIRECTORY = "SavePages/";
-    private static final String SAVE_DIRECTORY = "";
+    private static final String SAVE_DIRECTORY = "SavePages/";
+    //private static final String SAVE_DIRECTORY = "";
 
     public static void saveNews(String newsLink, String newsName) {
         try {
@@ -52,6 +51,33 @@ public class SaveNews extends Component {
         }
     }
 
+    public static void openDefaultBrowser(String url) {
+        String os = System.getProperty("os.name").toLowerCase();
+        Runtime rt = Runtime.getRuntime();
+
+        try {
+            if (os.contains("win")) {
+
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+            } else if (os.contains("mac")) {
+                rt.exec("open " + url);
+            } else {
+                if (os.contains("nix") || os.contains("nux")) {
+
+                    String[] browsers = {"epiphany", "firefox", "mozilla",
+                            "konqueror", "netscape", "opera", "links", "lynx"};
+
+                    // "browser0 "URI" || browser1 "URI" ||..."
+                    StringBuilder cmd = new StringBuilder();
+                    for (int i = 0; i < browsers.length; i++)
+                        cmd.append(i == 0 ? "" : " || ").append(browsers[i]).append(" \"").append(url).append("\" ");
+                    rt.exec(new String[]{"sh", "-c", cmd.toString()});
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
     public static void openNews(Stage primaryStage) throws IOException, URISyntaxException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open News");
@@ -63,29 +89,8 @@ public class SaveNews extends Component {
         if (file != null) {
 
             String url = file.toURI().toString();
-            String os = System.getProperty("os.name").toLowerCase();
-            Runtime rt = Runtime.getRuntime();
-            try {
-                if (os.contains("win")) {
+            openDefaultBrowser(url);
 
-                    rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
-                } else if (os.contains("mac")) {
-                    rt.exec("open " + url);
-                } else {
-                    if (os.contains("nix") || os.contains("nux")) {
-
-                        String[] browsers = {"epiphany", "firefox", "mozilla",
-                                "konqueror", "netscape", "opera", "links", "lynx"};
-
-                        // "browser0 "URI" || browser1 "URI" ||..."
-                        StringBuilder cmd = new StringBuilder();
-                        for (int i = 0; i < browsers.length; i++)
-                            cmd.append(i == 0 ? "" : " || ").append(browsers[i]).append(" \"").append(url).append("\" ");
-                        rt.exec(new String[]{"sh", "-c", cmd.toString()});
-                    }
-                }
-            } catch (Exception ignored) {
-            }
         }
     }
 

@@ -34,6 +34,13 @@ public class RSSFeedParser {
         }
     }
 
+    private static void catchRuntimeError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Runtime error.");
+        alert.setContentText("Sorry.\nServer is not responding\n");
+        alert.showAndWait();
+    }
+
     public Feed readFeed() {
         Feed feed = null;
         try {
@@ -96,15 +103,13 @@ public class RSSFeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
+                        message.setDate(pubdate.substring(0, pubdate.length() - 6));
                         feed.getMessages().add(message);
                     }
                 }
             }
         } catch (XMLStreamException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Runtime error.");
-            alert.setContentText("Sorry.\nServer is not responding\n");
-            alert.showAndWait();
+            catchRuntimeError();
         }
         return feed;
     }
@@ -123,10 +128,7 @@ public class RSSFeedParser {
         try {
             return url.openStream();
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Runtime error.");
-            alert.setContentText("Sorry.\nServer is not responding\n");
-            alert.showAndWait();
+            catchRuntimeError();
         }
         return null;
     }

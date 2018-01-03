@@ -1,10 +1,10 @@
-
+.root {
+    -fx-background-color: whitesmoke;
+}
 
 .label {
     -fx-opacity: 0.6;
 }
-
-
 
 .button {
 

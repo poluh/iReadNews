@@ -1,6 +1,7 @@
 package com.application;
 
 import com.application.action.event.ActionEvent;
+import com.application.file.CreateDirectory;
 import com.application.file.WorkFile;
 import com.application.news.FeedNews;
 import javafx.application.Application;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -25,11 +27,9 @@ import java.util.List;
 public class App extends Application {
 
     public static String PATH_TO_STYLE = "style/style.css";
-    private static boolean appWork = false;
+    private static String PATH_TO_ICON = "style/book-open.png";
 
     private static void createStartWindow(Stage primaryStage) {
-
-        appWork = true;
 
         primaryStage.setTitle("News");
 
@@ -49,7 +49,6 @@ public class App extends Application {
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
 
-        primaryStage.close();
         primaryStage.setTitle("Your RSS links.");
 
         GridPane grid = new GridPane();
@@ -89,13 +88,19 @@ public class App extends Application {
         TextField rssText = new TextField();
         grid.add(rssText, 1, 2);
 
-        Button btn = new Button("Get news!");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 5);
+        Button buttonFirstEntry = new Button("Get news!");
+        HBox hbBtnFirstEntry = new HBox(10);
+        hbBtnFirstEntry.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtnFirstEntry.getChildren().add(buttonFirstEntry);
+        grid.add(hbBtnFirstEntry, 1, 5);
+        ActionEvent.buttonEvent(buttonFirstEntry, primaryStage, rssText);
 
-        ActionEvent.buttonEvent(btn, primaryStage, rssText);
+        Button buttonPopularRSS = new Button("Append popular RSS.");
+        HBox hbBtnPopularRSS = new HBox(10);
+        hbBtnPopularRSS.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtnPopularRSS.getChildren().addAll(buttonPopularRSS);
+        grid.add(hbBtnPopularRSS, 0, 5);
+        ActionEvent.buttonPopularRSS(buttonPopularRSS, primaryStage);
 
     }
 
@@ -117,9 +122,9 @@ public class App extends Application {
                 TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
                 ActionEvent.buttonEvent(buttonTitleNewsPortal, primaryStage, textField);
 
-                HBox hbBtn = new HBox(10);
-                hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-                hbBtn.getChildren().add(buttonTitleNewsPortal);
+                HBox hbBtnTitleNewsPortal = new HBox(10);
+                hbBtnTitleNewsPortal.setAlignment(Pos.BOTTOM_LEFT);
+                hbBtnTitleNewsPortal.getChildren().add(buttonTitleNewsPortal);
 
                 Button buttonForDelNewsPortal = new Button("X");
                 buttonForDelNewsPortal.setMinSize(30, 30);
@@ -131,39 +136,38 @@ public class App extends Application {
 
                 GridPane miniGrid = new GridPane();
                 miniGrid.setHgap(10);
-                miniGrid.add(hbBtn, 0, 0);
+                miniGrid.add(hbBtnTitleNewsPortal, 0, 0);
                 miniGrid.add(hbBtnDel, 1, 0);
 
                 grid.add(miniGrid, 0, i);
 
                 i++;
             }
-
         }
         TextField rssField = new TextField();
         rssField.setAlignment(Pos.BOTTOM_LEFT);
         rssField.setMaxWidth(290);
 
-        Button addRSSLink = new Button("Add RSS.");
-        addRSSLink.setMinWidth(290);
-        ActionEvent.buttonEvent(addRSSLink, rssField, primaryStage);
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_LEFT);
-        hbBtn.getChildren().add(addRSSLink);
+        Button buttonAddRSSLink = new Button("Add RSS.");
+        buttonAddRSSLink.setMinWidth(290);
+        ActionEvent.buttonEvent(buttonAddRSSLink, rssField, primaryStage);
+        HBox hbBtnAddRSSLink = new HBox(10);
+        hbBtnAddRSSLink.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtnAddRSSLink.getChildren().add(buttonAddRSSLink);
 
-        Button openSaveNews = new Button("Open the saved news!");
+        Button openSaveNews = new Button("Go to saved news!");
         openSaveNews.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
         ActionEvent.openNews(openSaveNews, primaryStage);
-        HBox hbOSN = new HBox(10);
-        hbOSN.setAlignment(Pos.BOTTOM_LEFT);
-        hbOSN.getChildren().add(openSaveNews);
+        HBox hbBtnOPenSaveNews = new HBox(10);
+        hbBtnOPenSaveNews.setAlignment(Pos.BOTTOM_LEFT);
+        hbBtnOPenSaveNews.getChildren().add(openSaveNews);
 
-        Button delAll = new Button("Delete all saved news.");
+        Button delAll = new Button("Del all saved news.");
         delAll.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
         ActionEvent.deleteAllNews(delAll);
-        HBox hbDA = new HBox(10);
-        hbDA.setAlignment(Pos.BOTTOM_RIGHT);
-        hbDA.getChildren().add(delAll);
+        HBox hbBtnDelAll = new HBox(10);
+        hbBtnDelAll.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtnDelAll.getChildren().add(delAll);
 
         GridPane miniGrid = new GridPane();
         miniGrid.setHgap(10);
@@ -171,9 +175,9 @@ public class App extends Application {
         miniGrid.setMaxWidth(290);
 
         miniGrid.add(rssField, 0, 1, 2, 1);
-        miniGrid.add(hbBtn, 0, 2, 2, 1);
-        miniGrid.add(hbOSN, 0, 3);
-        miniGrid.add(hbDA, 1, 3);
+        miniGrid.add(hbBtnAddRSSLink, 0, 2, 2, 1);
+        miniGrid.add(hbBtnOPenSaveNews, 0, 3);
+        miniGrid.add(hbBtnDelAll, 1, 3);
         miniGrid.setAlignment(Pos.CENTER);
 
         grid.add(miniGrid, 0, i + 2);
@@ -186,12 +190,14 @@ public class App extends Application {
         if (!WorkFile.checkFile()) {
             createStartWindow(primaryStage);
         } else {
-            List<String> RSSLinks = WorkFile.listRSSLinks();
+            List<String> RSSLinks = WorkFile.listRSSLinks("0");
             createRSSLinksWindow(primaryStage, RSSLinks);
         }
+        primaryStage.getIcons().add(new Image(PATH_TO_ICON));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        CreateDirectory.createDirectory();
         launch(args);
     }
 

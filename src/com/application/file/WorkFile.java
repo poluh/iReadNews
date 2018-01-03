@@ -3,44 +3,49 @@ package com.application.file;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WorkFile {
 
-    private static final String FILENAME = "RSSLinks.txt";
-    private static final String BUFFFILE = "RSSLinkBUFF.txt";
-    //private static final String FILENAME = "DataBase/RSSDataBase/RSSLinks.txt";
-    //private static final String BUFFFILE = "DataBase/RSSDataBase/RSSLinkBUFF.txt";
+    private static final String FILE_NAME = "DataBase/RSSDataBase/RSSLinks.txt";
+    private static final String BUFF_FILE = "DataBase/RSSDataBase/RSSLinkBUFF.txt";
+    private static final String POPULAR_RSS = "DataBase/RSSDataBase/RSSPopularLinks.txt";
 
     public static boolean checkFile() {
-        return new File(FILENAME).exists();
+        return (new File(FILE_NAME).exists());
     }
 
     private static void createFile() {
         if (!checkFile()) {
-            new File(FILENAME);
+            new File(FILE_NAME);
         }
     }
 
     public static void addRSSLink(String link) throws IOException {
         createFile();
-        FileWriter RSSFile = new FileWriter(new File(FILENAME), true);
+        FileWriter RSSFile = new FileWriter(new File(FILE_NAME), true);
         RSSFile.write(link + "\n");
         RSSFile.close();
     }
 
-    public static List<String> listRSSLinks() throws IOException {
+    public static List<String> listRSSLinks(String key) throws IOException {
         List<String> answer = new ArrayList<>();
-        File file = new File(FILENAME);
+        File file = Objects.equals(key, "0") ? new File(FILE_NAME) : new File(POPULAR_RSS);
         BufferedReader fin = new BufferedReader(new FileReader(file));
         String line;
 
-        while ((line = fin.readLine()) != null) answer.add(line);
+        while ((line = fin.readLine()) != null) {
+            answer.add(line);
+            if (Objects.equals(key, "1")) {
+                addRSSLink(line);
+            }
+        }
         return answer;
     }
 
     public static void deleteRSSLink(String delLink) throws IOException {
-        File sourceFile = new File(FILENAME);
-        File outputFile = new File(BUFFFILE);
+        File sourceFile = new File(FILE_NAME);
+        File outputFile = new File(BUFF_FILE);
 
         BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
@@ -51,6 +56,7 @@ public class WorkFile {
                 writer.newLine();
             }
         }
+
         reader.close();
         writer.close();
         sourceFile.delete();

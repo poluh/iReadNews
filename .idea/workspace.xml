@@ -7,17 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcd9df9e-e5d0-442a-b149-608a52ae5133" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/sergey.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/App.java" afterPath="$PROJECT_DIR$/src/com/application/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" afterPath="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/file/WorkFile.java" afterPath="$PROJECT_DIR$/src/com/application/file/WorkFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/news/FeedNews.java" afterPath="$PROJECT_DIR$/src/com/application/news/FeedNews.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/news/SaveNews.java" afterPath="$PROJECT_DIR$/src/com/application/news/SaveNews.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java" afterPath="$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/style/style.css" afterPath="$PROJECT_DIR$/src/style/style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +38,18 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="-1">
+              <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RSSFeedParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="40" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -53,11 +58,11 @@
       <file leaf-file-name="ActionEvent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="96" column="36" lean-forward="false" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+            <state relative-caret-position="25">
+              <caret line="157" column="64" lean-forward="true" selection-start-line="157" selection-start-column="64" selection-end-line="157" selection-end-column="64" />
               <folding>
-                <element signature="e#7055#7056#0" expanded="true" />
-                <element signature="e#7120#7121#0" expanded="true" />
+                <element signature="e#7610#7611#0" expanded="true" />
+                <element signature="e#7675#7676#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,21 +71,21 @@
       <file leaf-file-name="WorkFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/file/WorkFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <element signature="e#446#447#0" expanded="true" />
-                <element signature="e#499#500#0" expanded="true" />
+                <element signature="e#447#448#0" expanded="true" />
+                <element signature="e#500#501#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SaveNews.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SaveNews.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="99" column="48" lean-forward="false" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
+            <state relative-caret-position="225">
+              <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -100,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/style/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -152,11 +157,11 @@
         <option value="$PROJECT_DIR$/src/com/application/news/FeedNews.java" />
         <option value="$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java" />
         <option value="$PROJECT_DIR$/src/style/style.css" />
-        <option value="$PROJECT_DIR$/src/com/application/news/SaveNews.java" />
-        <option value="$PROJECT_DIR$/src/com/application/file/WorkFile.java" />
         <option value="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" />
-        <option value="$PROJECT_DIR$/src/com/application/App.java" />
+        <option value="$PROJECT_DIR$/src/com/application/file/WorkFile.java" />
         <option value="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" />
+        <option value="$PROJECT_DIR$/src/com/application/App.java" />
+        <option value="$PROJECT_DIR$/src/com/application/news/SaveNews.java" />
       </list>
     </option>
   </component>
@@ -471,7 +476,7 @@
       <workItem from="1514846895717" duration="18360000" />
       <workItem from="1514903843381" duration="13867000" />
       <workItem from="1514942749206" duration="3923000" />
-      <workItem from="1514987324300" duration="10369000" />
+      <workItem from="1514987324300" duration="22448000" />
     </task>
     <task id="LOCAL-00001" summary="Update structure application.">
       <created>1514671435171</created>
@@ -550,11 +555,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514953730891</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added publication time for news; Added recommended RSS;&#10;Full news opens in a standard browser;&#10;Create .jar; create a directory when you open the application for the first time;">
+      <created>1515013981644</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1515013981644</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84153000" />
+    <option name="totallyTimeSpent" value="96232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -562,7 +574,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20072551" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -636,7 +648,8 @@
     <MESSAGE value="&#10;Added feature to view saved news. The layout of the list of RSS-links is broken. Debugs." />
     <MESSAGE value="New design! Added support for css! Little debugs." />
     <MESSAGE value="Fixed a bug that caused the application to DIE, GO TO HELL &amp;&amp; NEVER RETURN.&#10;Create .jat for test (out.artifacts), little debugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that caused the application to DIE, GO TO HELL &amp;&amp; NEVER RETURN.&#10;Create .jat for test (out.artifacts), little debugs." />
+    <MESSAGE value="Added publication time for news; Added recommended RSS;&#10;Full news opens in a standard browser;&#10;Create .jar; create a directory when you open the application for the first time;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added publication time for news; Added recommended RSS;&#10;Full news opens in a standard browser;&#10;Create .jar; create a directory when you open the application for the first time;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -872,14 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="642">
-          <caret line="105" column="81" lean-forward="false" selection-start-line="105" selection-start-column="81" selection-end-line="105" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/news/News.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -902,24 +907,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="99" column="48" lean-forward="false" selection-start-line="99" selection-start-column="48" selection-end-line="99" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="315">
+          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/file/WorkFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#500#501#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="157" column="64" lean-forward="true" selection-start-line="157" selection-start-column="64" selection-end-line="157" selection-end-column="64" />
+          <folding>
+            <element signature="e#7610#7611#0" expanded="true" />
+            <element signature="e#7675#7676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1">
+          <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="40" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -933,38 +971,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="96" column="36" lean-forward="false" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+        <state relative-caret-position="225">
+          <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding>
-            <element signature="e#7055#7056#0" expanded="true" />
-            <element signature="e#7120#7121#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/style/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>

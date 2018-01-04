@@ -5,9 +5,11 @@ import com.application.file.WorkFile;
 import com.application.news.GetNews;
 import com.application.news.News;
 import com.application.news.SaveNews;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -26,6 +28,7 @@ import java.util.Objects;
 
 
 public class ActionEvent {
+
 
     private static double width = 400;
     private static double height = 800;
@@ -48,6 +51,8 @@ public class ActionEvent {
                 }
             }
 
+            primaryStage.close();
+
             Stage newsStage = new Stage();
 
             newsStage.setTitle("News!");
@@ -58,6 +63,17 @@ public class ActionEvent {
             grid.setPadding(new Insets(20));
             grid.setVgap(15);
             grid.setMaxSize(width, height);
+
+            ScrollPane originPane = new ScrollPane();
+            originPane.setContent(grid);
+            originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+            Scene scene = new Scene(originPane, width + 50, height);
+            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
+            newsStage.setScene(scene);
+            newsStage.show();
+
 
             try {
                 createObjects(grid, rssText.getText().substring(0,
@@ -71,17 +87,6 @@ public class ActionEvent {
                 }
             }
 
-            ScrollPane originPane = new ScrollPane();
-            originPane.setContent(grid);
-            originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-            Scene scene = new Scene(originPane, width + 50, height);
-            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
-            newsStage.setScene(scene);
-            newsStage.show();
-
-            primaryStage.close();
         });
     }
 
@@ -107,8 +112,10 @@ public class ActionEvent {
         for (News news : newsList) {
 
             Text newsTitle = new Text(news.getTitle() + "\nОпубликовано: " + news.getDate());
-            newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            newsTitle.setWrappingWidth(width);
+            Platform.runLater(() -> {
+                newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+                newsTitle.setWrappingWidth(width);
+            });
 
             Text newsDescription = new Text(news.getDescription());
             newsDescription.setWrappingWidth(width);
@@ -122,41 +129,50 @@ public class ActionEvent {
             openNews(newsLink, news.getLink());
 
             Button newsSave = new Button("Save this new!");
-            newsSave.setTextFill(Color.RED);
-            newsSave.setAlignment(Pos.BOTTOM_RIGHT);
-            saveNews(newsSave, news.getLink(), news.getTitle());
+            Platform.runLater(() -> {
+                newsSave.setTextFill(Color.RED);
+                newsSave.setAlignment(Pos.BOTTOM_RIGHT);
+                saveNews(newsSave, news.getLink(), news.getTitle());
+            });
+            int finalI = i;
+            Platform.runLater(() -> {
+                GridPane miniGrid = new GridPane();
+                miniGrid.setHgap(20);
 
-            GridPane miniGrid = new GridPane();
-            miniGrid.setHgap(20);
+                miniGrid.add(newsLink, 0, 0);
+                miniGrid.add(newsSave, 1, 0);
 
-            miniGrid.add(newsLink, 0, 0);
-            miniGrid.add(newsSave, 1, 0);
-
-            grid.add(newsTitle, 0, i, 2, 1);
-            grid.add(newsDescription, 0, i + 1);
-            grid.add(miniGrid, 0, i + 2, 2, 1);
+                grid.add(newsTitle, 0, finalI, 2, 1);
+                grid.add(newsDescription, 0, finalI + 1);
+                grid.add(miniGrid, 0, finalI + 2, 2, 1);
+            });
 
             i += 3;
+            grid.impl_updatePeer();
         }
 
     }
 
     // Active event for button "Add RSS" in subtract window and button "X"
     public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage) {
-        button.setOnAction((javafx.event.ActionEvent event) -> {
-            try {
-                if (!Objects.equals(button.getText(), "X") && !button.getText().isEmpty()) {
-                    WorkFile.addRSSLink(RSSLink.getText());
-                } else WorkFile.deleteRSSLink(RSSLink.getText());
+        button.setOnAction((javafx.event.ActionEvent event) -> Platform.runLater(() -> {
+            String text = RSSLink.getText();
+            if (!text.matches("\\s+") && !text.isEmpty()) {
                 try {
-                    App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
-                } catch (NullPointerException e) {
-                    WorkFile.deleteRSSLink(RSSLink.getText());
-                    App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                    if (!Objects.equals(button.getText(), "X") && !button.getText().isEmpty()) {
+                        WorkFile.addRSSLink(RSSLink.getText());
+                    } else WorkFile.deleteRSSLink(RSSLink.getText());
+                    try {
+                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                    } catch (NullPointerException e) {
+                        WorkFile.deleteRSSLink(RSSLink.getText());
+                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                    }
+
+                } catch (IOException ignored) {
                 }
-            } catch (IOException ignored) {
             }
-        });
+        }));
     }
 
     public static void buttonPopularRSS(Button button, Stage primaryStage) {
@@ -180,8 +196,8 @@ public class ActionEvent {
 
     private static void toBack(Button button, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
-            toBack();
             primaryStage.close();
+            toBack();
         });
     }
 

@@ -13,7 +13,7 @@ import java.net.URLConnection;
 
 public class SaveNews extends Component {
 
-    private static final String SAVE_DIRECTORY = "SavePages/";
+    private static final String SAVE_DIRECTORY = "SavedPages/";
     //private static final String SAVE_DIRECTORY = "";
 
     public static void saveNews(String newsLink, String newsName) {

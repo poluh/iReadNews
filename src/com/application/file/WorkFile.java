@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 public class WorkFile {
 
     private static final String FILE_NAME = "DataBase/RSSDataBase/RSSLinks.txt";

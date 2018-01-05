@@ -29,6 +29,7 @@ public class App extends Application {
 
     public static String PATH_TO_STYLE = "style/style.css";
     private static String PATH_TO_ICON = "style/book-open.png";
+    private static Image ICON = new Image(PATH_TO_ICON);
 
     private static void createStartWindow(Stage primaryStage) {
 
@@ -63,6 +64,7 @@ public class App extends Application {
         Scene scene = new Scene(scrollPane, 350, 400);
         scene.getStylesheets().add(PATH_TO_STYLE);
 
+        primaryStage.getIcons().add(ICON);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -103,6 +105,8 @@ public class App extends Application {
         ActionEvent.buttonPopularRSS(buttonPopularRSS, primaryStage);
 
     }
+
+
 
     // This methods created obj for base window, after added links RSS
     private static void createObjects(GridPane grid, Stage primaryStage, List<String> RSSlinks) {
@@ -209,7 +213,7 @@ public class App extends Application {
             List<String> RSSLinks = WorkFile.listRSSLinks("0");
             createRSSLinksWindow(primaryStage, RSSLinks);
         }
-        primaryStage.getIcons().add(new Image(PATH_TO_ICON));
+        primaryStage.getIcons().add(ICON);
     }
 
     public static void main(String[] args) throws IOException {

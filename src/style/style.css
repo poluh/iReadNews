@@ -1,5 +1,6 @@
 .root {
     -fx-background-color: whitesmoke;
+    -fx-border-radius: 50;
 }
 
 .label {

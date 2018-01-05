@@ -1,5 +1,6 @@
 package com.application.rss.read;
 
+import com.application.file.WorkFile;
 import com.application.rss.model.Feed;
 import com.application.rss.model.FeedMessage;
 import javafx.scene.control.Alert;
@@ -28,9 +29,14 @@ public class RSSFeedParser {
             this.url = new URL(feedUrl);
         } catch (MalformedURLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("RSS not found. (" + url + ")");
+            alert.setTitle("RSS not found. (" + feedUrl + ")");
             alert.setContentText("Sorry.\nUnfortunately, we could not find the specified RSS-feed.");
             alert.showAndWait();
+            try {
+                WorkFile.deleteRSSLink(feedUrl);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -71,28 +77,28 @@ public class RSSFeedParser {
                             }
                             break;
                         case TITLE:
-                            title = getCharacterData(event, eventReader);
+                            title = getCharacterData(eventReader);
                             break;
                         case DESCRIPTION:
-                            description = getCharacterData(event, eventReader);
+                            description = getCharacterData(eventReader);
                             break;
                         case LINK:
-                            link = getCharacterData(event, eventReader);
+                            link = getCharacterData(eventReader);
                             break;
                         case GUID:
-                            guid = getCharacterData(event, eventReader);
+                            guid = getCharacterData(eventReader);
                             break;
                         case LANGUAGE:
-                            language = getCharacterData(event, eventReader);
+                            language = getCharacterData(eventReader);
                             break;
                         case AUTHOR:
-                            author = getCharacterData(event, eventReader);
+                            author = getCharacterData(eventReader);
                             break;
                         case PUB_DATE:
-                            pubdate = getCharacterData(event, eventReader);
+                            pubdate = getCharacterData(eventReader);
                             break;
                         case COPYRIGHT:
-                            copyright = getCharacterData(event, eventReader);
+                            copyright = getCharacterData(eventReader);
                             break;
                     }
                 } else if (event.isEndElement()) {
@@ -110,14 +116,19 @@ public class RSSFeedParser {
             }
         } catch (XMLStreamException e) {
             catchRuntimeError();
+            try {
+                WorkFile.deleteRSSLink(url.toString());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         return feed;
     }
 
-    private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
+    private String getCharacterData(XMLEventReader eventReader)
             throws XMLStreamException {
         String result = "";
-        event = eventReader.nextEvent();
+        XMLEvent event = eventReader.nextEvent();
         if (event instanceof Characters) {
             result = event.asCharacters().getData();
         }
@@ -129,6 +140,11 @@ public class RSSFeedParser {
             return url.openStream();
         } catch (IOException e) {
             catchRuntimeError();
+            try {
+                WorkFile.deleteRSSLink(url.toString());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
         return null;
     }

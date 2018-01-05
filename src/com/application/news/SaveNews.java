@@ -14,7 +14,6 @@ import java.net.URLConnection;
 public class SaveNews extends Component {
 
     private static final String SAVE_DIRECTORY = "SavedPages/";
-    //private static final String SAVE_DIRECTORY = "";
 
     public static void saveNews(String newsLink, String newsName) {
         try {
@@ -51,6 +50,23 @@ public class SaveNews extends Component {
         }
     }
 
+    public static void openNews(Stage primaryStage) throws IOException, URISyntaxException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(SAVE_DIRECTORY));
+        fileChooser.setTitle("Open News!");
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("Text files (*.html)", "*.html");
+
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showOpenDialog(primaryStage);
+        if (file != null) {
+
+            String url = file.toURI().toString();
+            openDefaultBrowser(url);
+
+        }
+    }
+
     public static void openDefaultBrowser(String url) {
         String os = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
@@ -75,22 +91,6 @@ public class SaveNews extends Component {
                 }
             }
         } catch (Exception ignored) {
-        }
-    }
-
-    public static void openNews(Stage primaryStage) throws IOException, URISyntaxException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open News");
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter("Text files (*.html)", "*.html");
-
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(primaryStage);
-        if (file != null) {
-
-            String url = file.toURI().toString();
-            openDefaultBrowser(url);
-
         }
     }
 

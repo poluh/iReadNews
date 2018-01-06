@@ -33,6 +33,7 @@ public class WorkFile {
     }
 
     public static List<String> listRSSLinks(String key) throws IOException {
+        createFile();
         List<String> answer = new ArrayList<>();
         File file = Objects.equals(key, "0") ? new File(FILE_NAME) : new File(POPULAR_RSS);
         BufferedReader fin = new BufferedReader(new FileReader(file));

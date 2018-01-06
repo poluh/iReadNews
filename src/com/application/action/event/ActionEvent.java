@@ -9,16 +9,9 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -29,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class ActionEvent {
@@ -187,10 +181,30 @@ public class ActionEvent {
 
     public static void buttonPopularRSS(Button button, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
-            try {
-                App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("1"));
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Append RSS.");
+            alert.setHeaderText("Choose one of the suggested options.");
+            alert.setContentText("You can go to the Yandex website " +
+                    "and select those RSSs that match your interests," +
+                    "or give yourself up to the developer's choice." +
+                    " (lenta, fontanka, Google news)");
+
+            ButtonType addYandex = new ButtonType("Set RSS in Yandex news");
+            ButtonType addRecommended = new ButtonType("Set recommended RSS portal");
+            ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(addYandex, addRecommended, cancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == addYandex) {
+                SaveNews.openDefaultBrowser("https://news.yandex.ru/export.html");
+            } else if (result.get() == addRecommended) {
+                try {
+                    App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("1"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

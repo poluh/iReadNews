@@ -1,5 +1,7 @@
 package com.application.file;
 
+import com.application.news.SaveNews;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +10,7 @@ import java.io.IOException;
 
 public class CreateDirectory {
     private final static String PATH_TO_DATABASE = "DataBase/RSSDataBase";
-    private final static String PATH_TO_SAVEDPAGES = "SavedPages";
+    private final static String PATH_TO_SAVEDPAGES = SaveNews.SAVE_DIRECTORY;
     private final static String PATH_TO_RSS_POPULAR_LINK = "DataBase/RSSDataBase/RSSPopularLinks.txt";
 
     public static void createDirectory() throws IOException {

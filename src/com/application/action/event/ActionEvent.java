@@ -9,20 +9,24 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,12 +68,22 @@ public class ActionEvent {
             grid.setVgap(15);
             grid.setMaxSize(width, height);
 
+            Button back = new Button("Back to links");
+            back.setId("button-toBack");
+
+            toBack(back, newsStage);
+            closeNewsWindow(newsStage);
+
             ScrollPane originPane = new ScrollPane();
             originPane.setContent(grid);
             originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
             originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-            Scene scene = new Scene(originPane, width + 50, height);
+            StackPane root = new StackPane();
+            StackPane.setMargin(back, new Insets(30, 0, height - 30, 0));
+            root.getChildren().addAll(originPane, back);
+
+            Scene scene = new Scene(root, width + 50, height);
             scene.getStylesheets().addAll(App.PATH_TO_STYLE);
             newsStage.setScene(scene);
             newsStage.show();
@@ -96,16 +110,6 @@ public class ActionEvent {
         List<News> newsList = GetNews.getNews(RSSLink);
 
         int i = 0;
-
-        Button back = new Button("Back to links");
-        toBack(back, primaryStage);
-        closeNewsWindow(primaryStage);
-
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_CENTER);
-        hbBtn.getChildren().addAll(back);
-        hbBtn.autosize();
-        grid.add(hbBtn, 0, i);
 
         i += 2;
 
@@ -154,22 +158,28 @@ public class ActionEvent {
     }
 
     // Active event for button "Add RSS" in subtract window and button "X"
-    public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage) {
+    public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage, String key) {
         button.setOnAction((javafx.event.ActionEvent event) -> Platform.runLater(() -> {
             String text = RSSLink.getText();
             if (!text.matches("\\s+") && !text.isEmpty()) {
                 try {
                     if (!Objects.equals(button.getText(), "X") && !button.getText().isEmpty()) {
                         WorkFile.addRSSLink(RSSLink.getText());
-                    } else WorkFile.deleteRSSLink(RSSLink.getText());
-                    try {
-                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
-                    } catch (NullPointerException e) {
+                    } else if (Objects.equals(key, "0")) {
                         WorkFile.deleteRSSLink(RSSLink.getText());
-                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                        try {
+                            App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                        } catch (NullPointerException e) {
+                            WorkFile.deleteRSSLink(RSSLink.getText());
+                            App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                        }
+                    } else {
+                        WorkFile.deleteSavedNews(key);
+                        App.createSavedPagesWindow(primaryStage, WorkFile.listNewsNames());
                     }
 
                 } catch (IOException ignored) {
+                    System.out.println("{Q");
                 }
             }
         }));
@@ -194,7 +204,7 @@ public class ActionEvent {
         }
     }
 
-    private static void toBack(Button button, Stage primaryStage) {
+    public static void toBack(Button button, Stage primaryStage) {
         button.setOnAction((javafx.event.ActionEvent event) -> {
             primaryStage.close();
             toBack();
@@ -209,11 +219,21 @@ public class ActionEvent {
         button.setOnMouseClicked(event -> SaveNews.openDefaultBrowser(link));
     }
 
-    public static void openNews(Button button, Stage primaryStage) {
+    public static void openSavedNews(Button button, String newsName) {
         button.setOnAction(event -> {
             try {
-                SaveNews.openNews(primaryStage);
-            } catch (IOException | URISyntaxException e) {
+                SaveNews.openNews(newsName);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void openSavedNewsWindow(Button button, Stage primaryStage) {
+        button.setOnAction(event -> {
+            try {
+                App.createSavedPagesWindow(primaryStage, WorkFile.listNewsNames());
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         });
@@ -223,7 +243,12 @@ public class ActionEvent {
         primaryStage.setOnCloseRequest(event -> toBack());
     }
 
-    public static void deleteAllNews(Button button) {
-        button.setOnAction(event -> SaveNews.dellAllNews());
+    public static void deleteAllNews(Button button, Stage primaryStage) {
+        button.setOnAction(event -> {
+            SaveNews.dellAllNews();
+            primaryStage.close();
+            toBack();
+        });
     }
+
 }

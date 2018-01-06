@@ -116,11 +116,6 @@ public class RSSFeedParser {
             }
         } catch (XMLStreamException e) {
             catchRuntimeError();
-            try {
-                WorkFile.deleteRSSLink(url.toString());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
         }
         return feed;
     }
@@ -140,11 +135,7 @@ public class RSSFeedParser {
             return url.openStream();
         } catch (IOException e) {
             catchRuntimeError();
-            try {
-                WorkFile.deleteRSSLink(url.toString());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+
         }
         return null;
     }

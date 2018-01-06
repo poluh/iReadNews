@@ -1,5 +1,6 @@
 package com.application.news;
 
+import com.application.App;
 import com.application.file.WorkFile;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
@@ -10,10 +11,11 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 
 public class SaveNews extends Component {
 
-    private static final String SAVE_DIRECTORY = "SavedPages/";
+    public static final String SAVE_DIRECTORY = "SavedPages";
 
     public static void saveNews(String newsLink, String newsName) {
         try {
@@ -28,7 +30,7 @@ public class SaveNews extends Component {
 
             InputStreamReader ReadIn = new InputStreamReader(GetConn.getInputStream());
             BufferedReader BufData = new BufferedReader(ReadIn);
-            String htmlFileName = (SAVE_DIRECTORY + newsName + ".html");
+            String htmlFileName = (SAVE_DIRECTORY + "/" + newsName + ".html");
             FileWriter FWriter = new FileWriter(htmlFileName);
             BufferedWriter BWriter = new BufferedWriter(FWriter);
             String UrlData;
@@ -47,23 +49,6 @@ public class SaveNews extends Component {
             alert.setTitle("Save error.");
             alert.setContentText("Save error.\nSomething went wrong...");
             alert.showAndWait();
-        }
-    }
-
-    public static void openNews(Stage primaryStage) throws IOException, URISyntaxException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(SAVE_DIRECTORY));
-        fileChooser.setTitle("Open News!");
-        FileChooser.ExtensionFilter extFilter =
-                new FileChooser.ExtensionFilter("Text files (*.html)", "*.html");
-
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(primaryStage);
-        if (file != null) {
-
-            String url = file.toURI().toString();
-            openDefaultBrowser(url);
-
         }
     }
 
@@ -94,11 +79,15 @@ public class SaveNews extends Component {
         }
     }
 
+    public static void openNews(String newsName) throws FileNotFoundException {
+        File htmlNews = new File(SAVE_DIRECTORY + "/" + newsName + ".html");
+        openDefaultBrowser(htmlNews.toURI().toString());
+    }
+
     public static void dellAllNews() {
         String path = "SavedPages/";
         try {
-            for (File myFile : new File(path).listFiles())
-                if (myFile.isFile()) myFile.delete();
+            Arrays.stream(new File(path).listFiles()).filter(File::isFile).forEach(File::delete);
         } catch (Exception ignored) { }
     }
 }

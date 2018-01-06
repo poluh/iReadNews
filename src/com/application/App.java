@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.AccessibleRole;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -51,27 +53,60 @@ public class App extends Application {
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
 
+
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.BOTTOM_RIGHT);
+        grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25));
 
-        primaryStage.setTitle("Your RSS links.");
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        primaryStage.setTitle("Your RSS links.");
+        primaryStage.getIcons().add(ICON);
 
         Scene scene = new Scene(scrollPane, 350, 400);
         scene.getStylesheets().add(PATH_TO_STYLE);
 
-        primaryStage.getIcons().add(ICON);
         primaryStage.setScene(scene);
         primaryStage.show();
 
         createObjects(grid, primaryStage, file);
     }
 
+    public static void createSavedPagesWindow(Stage primaryStage, List<String> savedNewsList) {
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(15));
+
+        ScrollPane scrollPane = new ScrollPane(grid);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        Button back = new Button("Back to links");
+        ActionEvent.toBack(back, primaryStage);
+
+        StackPane root = new StackPane();
+
+        root.getChildren().addAll(scrollPane, back);
+        StackPane.setMargin(back, new Insets(50, 0, 400, 0));
+
+        Scene scene = new Scene(root, 350, 400);
+        scene.getStylesheets().add(PATH_TO_STYLE);
+
+        primaryStage.setTitle("Your saved pages.");
+        primaryStage.getIcons().add(ICON);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        createListOfButton(grid, primaryStage, savedNewsList);
+    }
+
     // This method created object for start window
+
     private static void createObjects(GridPane grid, Stage primaryStage) {
 
         // Main Title
@@ -107,12 +142,12 @@ public class App extends Application {
     }
 
 
-
     // This methods created obj for base window, after added links RSS
+
     private static void createObjects(GridPane grid, Stage primaryStage, List<String> RSSlinks) {
 
 
-        Label title = new Label("You RSS links:");
+        Label title = new Label("Your RSS links:");
         title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(title, 0, 0);
 
@@ -130,7 +165,7 @@ public class App extends Application {
 
                     Platform.runLater(() -> {
                         ActionEvent.buttonEvent(buttonTitleNewsPortal, primaryStage, textField);
-                        ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage);
+                        ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage, "0");
                     });
 
                     Platform.runLater(() -> {
@@ -169,24 +204,18 @@ public class App extends Application {
 
             Button buttonAddRSSLink = new Button("Add RSS.");
             buttonAddRSSLink.setMinWidth(290);
-            ActionEvent.buttonEvent(buttonAddRSSLink, rssField, primaryStage);
+            ActionEvent.buttonEvent(buttonAddRSSLink, rssField, primaryStage, "0");
             HBox hbBtnAddRSSLink = new HBox(10);
             hbBtnAddRSSLink.setAlignment(Pos.BOTTOM_LEFT);
             hbBtnAddRSSLink.getChildren().add(buttonAddRSSLink);
 
             Button openSaveNews = new Button("Go to saved news!");
-            openSaveNews.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
-            ActionEvent.openNews(openSaveNews, primaryStage);
+            openSaveNews.setMinWidth(290);
+            ActionEvent.openSavedNewsWindow(openSaveNews, primaryStage);
             HBox hbBtnOPenSaveNews = new HBox(10);
-            hbBtnOPenSaveNews.setAlignment(Pos.BOTTOM_LEFT);
+            hbBtnOPenSaveNews.setAlignment(Pos.BOTTOM_CENTER);
             hbBtnOPenSaveNews.getChildren().add(openSaveNews);
 
-            Button delAll = new Button("Del all saved news.");
-            delAll.setFont(Font.font("Tahoma", FontWeight.NORMAL, 11));
-            ActionEvent.deleteAllNews(delAll);
-            HBox hbBtnDelAll = new HBox(10);
-            hbBtnDelAll.setAlignment(Pos.BOTTOM_RIGHT);
-            hbBtnDelAll.getChildren().add(delAll);
 
             GridPane miniGrid = new GridPane();
             miniGrid.setHgap(10);
@@ -195,13 +224,52 @@ public class App extends Application {
 
             miniGrid.add(rssField, 0, 1, 2, 1);
             miniGrid.add(hbBtnAddRSSLink, 0, 2, 2, 1);
-            miniGrid.add(hbBtnOPenSaveNews, 0, 3);
-            miniGrid.add(hbBtnDelAll, 1, 3);
+            miniGrid.add(hbBtnOPenSaveNews, 0, 3, 2, 1);
             miniGrid.setAlignment(Pos.CENTER);
 
             grid.add(miniGrid, 0, i[0] + 2);
 
         });
+    }
+
+    private static void createListOfButton(GridPane grid, Stage primaryStage, List<String> namesList) {
+
+        int i = 3;
+        for (String newsName : namesList) {
+
+            Button news = new Button(newsName);
+            news.setMinWidth(270);
+            news.setAlignment(Pos.BOTTOM_CENTER);
+            ActionEvent.openSavedNews(news, newsName);
+
+            GridPane miniGrid = new GridPane();
+            miniGrid.setHgap(10);
+
+            Button delNews = new Button("X");
+            ActionEvent.buttonEvent(delNews, new TextField("Check key"), primaryStage, newsName);
+
+            miniGrid.add(news, 0, 0);
+            miniGrid.add(delNews, 1, 0);
+
+            grid.add(miniGrid, 0, i);
+            i++;
+        }
+
+        if (i == 3) {
+            Label label = new Label("Saved news not found :(");
+            label.setFont(Font.font(25));
+            HBox hBox = new HBox(label);
+            hBox.setAlignment(Pos.BOTTOM_CENTER);
+            grid.add(hBox, 0, 20);
+        } else {
+            Button dellAll = new Button("Clear cache");
+            ActionEvent.deleteAllNews(dellAll, primaryStage);
+            HBox hbDellAll = new HBox();
+            hbDellAll.setAlignment(Pos.BOTTOM_CENTER);
+            hbDellAll.getChildren().addAll(dellAll);
+            hbDellAll.autosize();
+            grid.add(hbDellAll, 0, i + 1);
+        }
     }
 
     @Override

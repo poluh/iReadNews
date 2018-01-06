@@ -1,7 +1,10 @@
 package com.application.file;
 
+import com.application.news.SaveNews;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +47,18 @@ public class WorkFile {
         return answer;
     }
 
+    public static List<String> listNewsNames() throws IOException {
+        List<String> answer = new ArrayList<>();
+        File[] files = new File(SaveNews.SAVE_DIRECTORY).listFiles();
+
+        assert files != null;
+        for (File file : files) {
+            answer.add(file.getName().replace(".html", ""));
+        }
+
+        return answer;
+    }
+
     public static void deleteRSSLink(String delLink) throws IOException {
         File sourceFile = new File(FILE_NAME);
         File outputFile = new File(BUFF_FILE);
@@ -65,8 +80,15 @@ public class WorkFile {
     }
 
     public static String normalizedName(String newsName) {
-        return newsName.substring(0, 20).replace(" ", "-");
+        return newsName.substring(0, 30) + "...";
     }
 
+    public static void deleteSavedNews(String nameNews) {
+
+        Arrays.stream(new File(SaveNews.SAVE_DIRECTORY).listFiles()).filter(file -> file.isFile() &&
+                Objects.equals(file.toString(),
+                        SaveNews.SAVE_DIRECTORY + "/" + nameNews + ".html")).forEach(File::delete);
+
+    }
 
 }

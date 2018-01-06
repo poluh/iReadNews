@@ -1,22 +1,41 @@
 .root {
     -fx-background-color: whitesmoke;
     -fx-border-radius: 50;
+    -fx-arc-height: 50;
+    -fx-arc-width: 50;
+}
+
+#scene {
+    -fx-background-color: whitesmoke;
+    -fx-border-radius: 50;
 }
 
 .label {
     -fx-opacity: 0.6;
 }
 
-.button {
+#button-toBack {
+    -fx-effect: dropshadow(three-pass-box, #545454, 10, 0, 3.5, 3.5);
+}
 
+#button-up:pressed {
+    -fx-border-color: #aaaaaa;
+    -fx-background-color: #aaaaaa;
+}
+
+#button-up:focused {
+    -fx-border-color: #cecece;
+    -fx-background-color: #cecece;
+}
+
+.button {
     -fx-border-color: #ededed;
     -fx-border-radius: 30;
-    -fx-border-width: 2;
+    -fx-border-width: 1.5;
     -fx-background-radius: 30;
     -fx-background-color: #fafafa;
     -fx-font-family: "Segoe UI", Helvetica, sans-serif;
     -fx-text-fill: #02547D;
-
 }
 
 .button:hover {

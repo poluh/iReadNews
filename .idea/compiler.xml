@@ -13,6 +13,8 @@
       <entry name="!?*.aj" />
       <entry name="?*.ftl" />
       <entry name="?*.css" />
+      <entry name="?*.py" />
+      <entry name="?*.png" />
     </wildcardResourcePatterns>
   </component>
 </project>

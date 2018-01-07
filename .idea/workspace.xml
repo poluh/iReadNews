@@ -7,14 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcd9df9e-e5d0-442a-b149-608a52ae5133" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_net_3_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_net_3_6_src.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LittleApplication.iml" afterPath="$PROJECT_DIR$/LittleApplication.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/App.java" afterPath="$PROJECT_DIR$/src/com/application/App.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" afterPath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" afterPath="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,11 +56,11 @@
       <file leaf-file-name="ConfigConnect.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="50" lean-forward="false" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+            <state relative-caret-position="60">
+              <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
               <folding>
-                <element signature="e#402#403#0" expanded="true" />
-                <element signature="e#490#491#0" expanded="true" />
+                <element signature="e#388#389#0" expanded="true" />
+                <element signature="e#476#477#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +69,8 @@
       <file leaf-file-name="ConnectServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="291">
+              <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -150,8 +146,8 @@
         <option value="$PROJECT_DIR$/src/python/launching/RunScript.java" />
         <option value="$PROJECT_DIR$/src/ftp_connect/com/script/ftp/ftpConnect.py" />
         <option value="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" />
-        <option value="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
         <option value="$PROJECT_DIR$/src/com/application/App.java" />
+        <option value="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
         <option value="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" />
       </list>
     </option>
@@ -463,7 +459,7 @@
       <workItem from="1515254461965" duration="4318000" />
       <workItem from="1515284585812" duration="1604000" />
       <workItem from="1515294617331" duration="382000" />
-      <workItem from="1515299705929" duration="7102000" />
+      <workItem from="1515299705929" duration="7443000" />
     </task>
     <task id="LOCAL-00001" summary="Update structure application.">
       <created>1514671435171</created>
@@ -591,11 +587,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515290334246</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added support for searching for updates on java! Little debugs.">
+      <created>1515308806510</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1515308806511</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138976000" />
+    <option name="totallyTimeSpent" value="139317000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -685,7 +688,8 @@
     <MESSAGE value="Added the ability at the first start to add any RSS from Yandex. (by going to the site)" />
     <MESSAGE value="Append search upd (alpha)" />
     <MESSAGE value="Removed search for updates. (:D) Now there will be a separate .py file for downloading iReadNews." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed search for updates. (:D) Now there will be a separate .py file for downloading iReadNews." />
+    <MESSAGE value="Added support for searching for updates on java! Little debugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for searching for updates on java! Little debugs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -959,19 +963,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="291">
+          <caret line="28" column="56" lean-forward="false" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="50" lean-forward="false" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+        <state relative-caret-position="60">
+          <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
           <folding>
-            <element signature="e#402#403#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#476#477#0" expanded="true" />
           </folding>
         </state>
       </provider>

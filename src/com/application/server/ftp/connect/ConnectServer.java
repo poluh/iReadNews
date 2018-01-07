@@ -26,6 +26,8 @@ class ConnectServer {
 
                 ftp.changeWorkingDirectory("/");
 
+                ConfigConnect.CURRENT_VERSION = VERSION;
+
                 OutputStream outputStream =
                         new BufferedOutputStream(new FileOutputStream(SAVE_FILENAME));
                 ftp.retrieveFile(DIR + "/" + FILENAME, outputStream);

@@ -4,7 +4,6 @@ import com.application.action.event.ActionEvent;
 import com.application.file.CreateDirectory;
 import com.application.file.WorkFile;
 import com.application.news.FeedNews;
-import com.application.server.ftp.connect.ConfigConnect;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -149,7 +148,7 @@ public class App extends Application {
         grid.add(title, 0, 0);
 
         final int[] i = {1};
-        Platform.runLater(()  -> {
+        Platform.runLater(() -> {
             for (String link : RSSlinks) {
                 if (!link.matches("\\s+") && !link.isEmpty()) {
 
@@ -269,23 +268,8 @@ public class App extends Application {
         }
     }
 
-    private static void checkUpdate() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Check update!");
-        alert.setHeaderText("We check for new versions.");
-        alert.setContentText("At this stage, this is very important," +
-                " so this action can not be undone." +
-                " We will automatically install updates." +
-                " If you are afraid that this can harm you," +
-                " can see the source code of each update on GitGub.com/iReadNews.");
-        alert.show();
-        ConfigConnect.connection();
-        alert.close();
-    }
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-
         if (!WorkFile.checkFile()) {
             createStartWindow(primaryStage);
         } else {
@@ -293,7 +277,6 @@ public class App extends Application {
             createRSSLinksWindow(primaryStage, RSSLinks);
         }
         primaryStage.getIcons().add(ICON);
-        checkUpdate();
     }
 
     public static void main(String[] args) throws IOException {

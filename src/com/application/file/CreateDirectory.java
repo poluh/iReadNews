@@ -2,10 +2,7 @@ package com.application.file;
 
 import com.application.news.SaveNews;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 
 public class CreateDirectory {
@@ -24,6 +21,5 @@ public class CreateDirectory {
                 "http://www.fontanka.ru/fontanka.rss\n" +
                 "https://news.google.com/news/rss/?ned=ru_ru&gl=RU&hl=ru");
         writer.close();
-
     }
 }

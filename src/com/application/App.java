@@ -4,16 +4,13 @@ import com.application.action.event.ActionEvent;
 import com.application.file.CreateDirectory;
 import com.application.file.WorkFile;
 import com.application.news.FeedNews;
+import com.application.server.ftp.connect.ConfigConnect;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.AccessibleRole;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -272,6 +269,20 @@ public class App extends Application {
         }
     }
 
+    private static void checkUpdate() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Check update!");
+        alert.setHeaderText("We check for new versions.");
+        alert.setContentText("At this stage, this is very important," +
+                " so this action can not be undone." +
+                " We will automatically install updates." +
+                " If you are afraid that this can harm you," +
+                " can see the source code of each update on GitGub.com/iReadNews.");
+        alert.show();
+        ConfigConnect.connection();
+        alert.close();
+    }
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -282,6 +293,7 @@ public class App extends Application {
             createRSSLinksWindow(primaryStage, RSSLinks);
         }
         primaryStage.getIcons().add(ICON);
+        checkUpdate();
     }
 
     public static void main(String[] args) throws IOException {

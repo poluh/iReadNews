@@ -14,8 +14,8 @@ public class CreateDirectory {
         final File DATABASE = new File(PATH_TO_DATABASE);
         final File SAVEPAGES = new File(PATH_TO_SAVEDPAGES);
         final File outputFile = new File(PATH_TO_RSS_POPULAR_LINK);
-        SAVEPAGES.mkdirs();
         DATABASE.mkdirs();
+        SAVEPAGES.mkdirs();
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
         writer.write("https://lenta.ru/rss/news\n" +
                 "http://www.fontanka.ru/fontanka.rss\n" +

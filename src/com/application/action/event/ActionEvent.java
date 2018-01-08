@@ -70,7 +70,6 @@ public class ActionEvent {
 
             ScrollPane originPane = new ScrollPane();
             originPane.setContent(grid);
-            originPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
             originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
             StackPane root = new StackPane();
@@ -235,7 +234,7 @@ public class ActionEvent {
     public static void openSavedNews(Button button, String newsName) {
         button.setOnAction(event -> {
             try {
-                SaveNews.openNews(newsName);
+                SaveNews.openNews(WorkFile.normalizedName(newsName));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

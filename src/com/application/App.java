@@ -49,7 +49,6 @@ public class App extends Application {
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
 
-
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

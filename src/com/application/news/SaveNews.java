@@ -2,16 +2,13 @@ package com.application.news;
 
 import com.application.file.WorkFile;
 import javafx.scene.control.Alert;
-
-import java.awt.*;
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.Arrays;
 
 public class SaveNews {
 
-    public static final String SAVE_DIRECTORY = "SavedPages";
+    public static final String SAVE_DIRECTORY = "DataBase/SavedPages";
 
     public static void saveNews(String newsLink, String newsName) {
         try {
@@ -72,17 +69,20 @@ public class SaveNews {
                 }
             }
         } catch (Exception ignored) {
-            System.out.println("Error");
         }
     }
 
     public static void openNews(String newsName) throws FileNotFoundException {
-        File htmlNews = new File(SAVE_DIRECTORY + "/" + newsName + ".html");
+        File htmlNews = new File(SAVE_DIRECTORY + "/" +
+                newsName.replace("...", "").replace(" ", "-") + ".html");
         openDefaultBrowser(htmlNews.toURI().toString());
+        System.out.println(htmlNews.getName());
+        System.out.println(htmlNews.toURI().toString());
+
     }
 
     public static void dellAllNews() {
-        String path = "SavedPages/";
+        String path = SAVE_DIRECTORY + "/";
         try {
             Arrays.stream(new File(path).listFiles()).filter(File::isFile).forEach(File::delete);
         } catch (Exception ignored) { }

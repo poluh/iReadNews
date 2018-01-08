@@ -3,6 +3,8 @@ package com.application.file;
 import com.application.news.SaveNews;
 
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +56,7 @@ public class WorkFile {
 
         assert files != null;
         for (File file : files) {
-            answer.add(file.getName().replace(".html", ""));
+            answer.add(file.getName().replace(".html", "...").replace("-", " "));
         }
 
         return answer;
@@ -81,7 +83,7 @@ public class WorkFile {
     }
 
     public static String normalizedName(String newsName) {
-        return newsName.substring(0, 30) + "...";
+            return (newsName.replace(" ", "-").substring(0, 30));
     }
 
     public static void deleteSavedNews(String nameNews) {

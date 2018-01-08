@@ -147,85 +147,38 @@ public class App extends Application {
         title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(title, 0, 0);
 
-        final int[] i = {1};
-        Platform.runLater(() -> {
-            for (String link : RSSlinks) {
-                if (!link.matches("\\s+") && !link.isEmpty()) {
+        int i = 1;
+        for (String link : RSSlinks) {
+            Button titlePortal = new Button(new FeedNews(link).getTitleString());
+            TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
+            titlePortal.setMinWidth(250);
+            titlePortal.setMaxWidth(250);
+            titlePortal.setWrapText(true);
+            ActionEvent.buttonEvent(titlePortal, primaryStage, textField);
 
-                    Button buttonTitleNewsPortal = new Button(new FeedNews(link).getTitleString());
-                    TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
-                    HBox hbBtnTitleNewsPortal = new HBox(10);
-                    Button buttonForDelNewsPortal = new Button("X");
-                    HBox hbBtnDel = new HBox(10);
-                    GridPane miniGrid = new GridPane();
+            Button delPortal = new Button("X");
+            ActionEvent.buttonEvent(delPortal, new TextField(link), primaryStage, "0");
 
-                    Platform.runLater(() -> {
-                        ActionEvent.buttonEvent(buttonTitleNewsPortal, primaryStage, textField);
-                        ActionEvent.buttonEvent(buttonForDelNewsPortal, new TextField(link), primaryStage, "0");
-                    });
+            grid.add(titlePortal, 0, i);
+            grid.add(delPortal, 1, i);
+            i++;
+        }
 
-                    Platform.runLater(() -> {
-                        buttonTitleNewsPortal.setMinSize(250, 30);
-                        buttonTitleNewsPortal.setMaxWidth(250);
-                        buttonTitleNewsPortal.setWrapText(true);
-                        buttonForDelNewsPortal.setMinSize(30, 30);
-                    });
+        TextField rssField = new TextField();
 
-                    Platform.runLater(() -> {
-                        hbBtnDel.getChildren().add(buttonForDelNewsPortal);
-                        hbBtnTitleNewsPortal.getChildren().add(buttonTitleNewsPortal);
-                        hbBtnTitleNewsPortal.setAlignment(Pos.BOTTOM_LEFT);
-                        hbBtnDel.setAlignment(Pos.CENTER_LEFT);
-                    });
+        Button addRSS = new Button("Add RSS link");
+        addRSS.setMinWidth(290);
+        ActionEvent.buttonEvent(addRSS, rssField, primaryStage, "0");
 
-                    int finalI = i[0];
-                    Platform.runLater(() -> {
+        Button goToSaved = new Button("Go to saved news");
+        goToSaved.setMinWidth(290);
+        ActionEvent.openSavedNewsWindow(goToSaved, primaryStage);
 
-                        miniGrid.setHgap(10);
-                        miniGrid.add(hbBtnTitleNewsPortal, 0, 0);
-                        miniGrid.add(hbBtnDel, 1, 0);
-
-                        grid.add(miniGrid, 0, finalI);
-                    });
-
-                    i[0]++;
-                }
-            }
-        });
-
-        Platform.runLater(() -> {
-            TextField rssField = new TextField();
-            rssField.setAlignment(Pos.BOTTOM_LEFT);
-            rssField.setMaxWidth(290);
-
-            Button buttonAddRSSLink = new Button("Add RSS.");
-            buttonAddRSSLink.setMinWidth(290);
-            ActionEvent.buttonEvent(buttonAddRSSLink, rssField, primaryStage, "0");
-            HBox hbBtnAddRSSLink = new HBox(10);
-            hbBtnAddRSSLink.setAlignment(Pos.BOTTOM_LEFT);
-            hbBtnAddRSSLink.getChildren().add(buttonAddRSSLink);
-
-            Button openSaveNews = new Button("Go to saved news!");
-            openSaveNews.setMinWidth(290);
-            ActionEvent.openSavedNewsWindow(openSaveNews, primaryStage);
-            HBox hbBtnOPenSaveNews = new HBox(10);
-            hbBtnOPenSaveNews.setAlignment(Pos.BOTTOM_CENTER);
-            hbBtnOPenSaveNews.getChildren().add(openSaveNews);
+        grid.add(rssField, 0, i + 1, 2,1);
+        grid.add(addRSS, 0, i + 2, 2, 1);
+        grid.add(goToSaved, 0, i + 3, 2, 1);
 
 
-            GridPane miniGrid = new GridPane();
-            miniGrid.setHgap(10);
-            miniGrid.setVgap(10);
-            miniGrid.setMaxWidth(290);
-
-            miniGrid.add(rssField, 0, 1, 2, 1);
-            miniGrid.add(hbBtnAddRSSLink, 0, 2, 2, 1);
-            miniGrid.add(hbBtnOPenSaveNews, 0, 3, 2, 1);
-            miniGrid.setAlignment(Pos.CENTER);
-
-            grid.add(miniGrid, 0, i[0] + 2);
-
-        });
     }
 
     private static void createListOfButton(GridPane grid, Stage primaryStage, List<String> namesList) {

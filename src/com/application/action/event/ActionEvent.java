@@ -153,28 +153,27 @@ public class ActionEvent {
 
     // Active event for button "Add RSS" in subtract window and button "X"
     public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage, String key) {
-        button.setOnAction((javafx.event.ActionEvent event) -> Platform.runLater(() -> {
+        button.setOnAction(event -> Platform.runLater(() -> {
             String text = RSSLink.getText();
-            if (!text.matches("\\s+") && !text.isEmpty()) {
-                try {
-                    if (!Objects.equals(button.getText(), "X") && !button.getText().isEmpty()) {
-                        WorkFile.addRSSLink(RSSLink.getText());
-                    } else if (Objects.equals(key, "0")) {
-                        WorkFile.deleteRSSLink(RSSLink.getText());
-                        try {
-                            App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
-                        } catch (NullPointerException e) {
-                            WorkFile.deleteRSSLink(RSSLink.getText());
-                            App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
-                        }
+            try {
+                if (!Objects.equals(button.getText(), "X")) {
+                    try {
+                        WorkFile.addRSSLink(text);
+                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                    } catch (NullPointerException e) {
+                        WorkFile.deleteRSSLink(text);
+                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
+                    }
+                } else {
+                    if (Objects.equals(primaryStage.getTitle(), "Your RSS links.")) {
+                        WorkFile.deleteRSSLink(text);
+                        App.createRSSLinksWindow(primaryStage, WorkFile.listRSSLinks("0"));
                     } else {
                         WorkFile.deleteSavedNews(key);
                         App.createSavedPagesWindow(primaryStage, WorkFile.listNewsNames());
                     }
-
-                } catch (IOException ignored) {
-                    System.out.println("{Q");
                 }
+            } catch (Exception ignored) {
             }
         }));
     }

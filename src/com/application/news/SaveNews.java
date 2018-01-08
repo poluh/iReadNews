@@ -1,19 +1,15 @@
 package com.application.news;
 
-import com.application.App;
 import com.application.file.WorkFile;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 
-public class SaveNews extends Component {
+public class SaveNews {
 
     public static final String SAVE_DIRECTORY = "SavedPages";
 
@@ -66,7 +62,7 @@ public class SaveNews extends Component {
                 if (os.contains("nix") || os.contains("nux")) {
 
                     String[] browsers = {"epiphany", "firefox", "mozilla",
-                            "konqueror", "netscape", "opera", "links", "lynx"};
+                            "konqueror", "netscape", "opera", "links", "lynx", "safari"};
 
                     // "browser0 "URI" || browser1 "URI" ||..."
                     StringBuilder cmd = new StringBuilder();
@@ -76,6 +72,7 @@ public class SaveNews extends Component {
                 }
             }
         } catch (Exception ignored) {
+            System.out.println("Error");
         }
     }
 

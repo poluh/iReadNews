@@ -5,12 +5,15 @@ import com.application.file.CreateDirectory;
 import com.application.file.WorkFile;
 import com.application.news.FeedNews;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -125,7 +128,7 @@ public class App extends Application {
         hbBtnFirstEntry.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtnFirstEntry.getChildren().add(buttonFirstEntry);
         grid.add(hbBtnFirstEntry, 1, 5);
-        ActionEvent.buttonEvent(buttonFirstEntry, primaryStage, rssText);
+        ActionEvent.buttonEvent(buttonFirstEntry, primaryStage, rssText, null);
 
         Button buttonPopularRSS = new Button("Append popular RSS.");
         HBox hbBtnPopularRSS = new HBox(10);
@@ -148,12 +151,14 @@ public class App extends Application {
 
         int i = 1;
         for (String link : RSSlinks) {
-            Button titlePortal = new Button(new FeedNews(link).getTitleString());
-            TextField textField = new TextField(link + ":/LINK/:" + new FeedNews(link).getTitleString());
+            FeedNews feedNews = new FeedNews(link);
+            Button titlePortal = new Button(new FeedNews(link).getTitle());
+            TextField textField = new TextField(link + ":/LINK/:" + feedNews.getTitle());
             titlePortal.setMinWidth(250);
             titlePortal.setMaxWidth(250);
             titlePortal.setWrapText(true);
-            ActionEvent.buttonEvent(titlePortal, primaryStage, textField);
+
+            ActionEvent.buttonEvent(titlePortal, primaryStage, textField, feedNews.getImage());
 
             Button delPortal = new Button("X");
             ActionEvent.buttonEvent(delPortal, new TextField(link), primaryStage, "0");
@@ -173,7 +178,7 @@ public class App extends Application {
         goToSaved.setMinWidth(290);
         ActionEvent.openSavedNewsWindow(goToSaved, primaryStage);
 
-        grid.add(rssField, 0, i + 1, 2,1);
+        grid.add(rssField, 0, i + 1, 2, 1);
         grid.add(addRSS, 0, i + 2, 2, 1);
         grid.add(goToSaved, 0, i + 3, 2, 1);
 

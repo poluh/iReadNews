@@ -7,12 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcd9df9e-e5d0-442a-b149-608a52ae5133" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/rss/model/RSSFeed.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/rss/model/RSSMessage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/application/rss/read/RSSParser.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/application/rss/model/Feed.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/application/rss/model/FeedMessage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/application/rss/tests/ReadTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/App.java" afterPath="$PROJECT_DIR$/src/com/application/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" afterPath="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" afterPath="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/file/WorkFile.java" afterPath="$PROJECT_DIR$/src/com/application/file/WorkFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/news/SaveNews.java" afterPath="$PROJECT_DIR$/src/com/application/news/SaveNews.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/news/FeedNews.java" afterPath="$PROJECT_DIR$/src/com/application/news/FeedNews.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/application/news/GetNews.java" afterPath="$PROJECT_DIR$/src/com/application/news/GetNews.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/style/style.css" afterPath="$PROJECT_DIR$/src/style/style.css" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +45,8 @@
       <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1539">
-              <caret line="69" column="48" lean-forward="false" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
+            <state relative-caret-position="389">
+              <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,17 +54,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionEvent.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ActionEvent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="628">
-              <caret line="71" column="40" lean-forward="false" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+            <state relative-caret-position="954">
+              <caret line="123" column="20" lean-forward="false" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorkFile.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/style/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorkFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/file/WorkFile.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="575">
@@ -70,22 +87,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateDirectory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/application/file/CreateDirectory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SaveNews.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1140">
+            <state relative-caret-position="754">
               <caret line="76" column="59" lean-forward="false" selection-start-line="76" selection-start-column="59" selection-end-line="76" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -124,7 +129,6 @@
         <option value="$PROJECT_DIR$/src/com/application/Main.java" />
         <option value="$PROJECT_DIR$/src/com/application/rss/reader/Reader.java" />
         <option value="$PROJECT_DIR$/src/com/application/connection/Сonnection.java" />
-        <option value="$PROJECT_DIR$/src/com/application/rss/model/Feed.java" />
         <option value="$PROJECT_DIR$/src/com/application/rss/tests/ReadTest.java" />
         <option value="$PROJECT_DIR$/src/com/application/news/News.java" />
         <option value="$PROJECT_DIR$/src/com/application/news/ParsNews.java" />
@@ -133,20 +137,25 @@
         <option value="$PROJECT_DIR$/RSSDataBase.mwb" />
         <option value="$PROJECT_DIR$/Style/css/style.css" />
         <option value="$PROJECT_DIR$/src/lang/SwitchLang.java" />
-        <option value="$PROJECT_DIR$/src/com/application/news/FeedNews.java" />
-        <option value="$PROJECT_DIR$/src/com/application/news/GetNews.java" />
         <option value="$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java" />
-        <option value="$PROJECT_DIR$/src/style/style.css" />
         <option value="$PROJECT_DIR$/src/com/application/search/updates/ftp/Connect.java" />
         <option value="$PROJECT_DIR$/src/python/launching/RunScript.java" />
         <option value="$PROJECT_DIR$/src/ftp_connect/com/script/ftp/ftpConnect.py" />
         <option value="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" />
         <option value="$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
-        <option value="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" />
         <option value="$PROJECT_DIR$/src/com/application/file/CreateDirectory.java" />
-        <option value="$PROJECT_DIR$/src/com/application/App.java" />
         <option value="$PROJECT_DIR$/src/com/application/news/SaveNews.java" />
         <option value="$PROJECT_DIR$/src/com/application/file/WorkFile.java" />
+        <option value="$PROJECT_DIR$/src/com/application/rss/model/Feed.java" />
+        <option value="$PROJECT_DIR$/src/com/application/rss/model/RSSMessages.java" />
+        <option value="$PROJECT_DIR$/src/com/application/rss/model/RSSMessage.java" />
+        <option value="$PROJECT_DIR$/src/com/application/rss/model/RSSFeed.java" />
+        <option value="$PROJECT_DIR$/src/com/application/news/FeedNews.java" />
+        <option value="$PROJECT_DIR$/src/com/application/news/GetNews.java" />
+        <option value="$PROJECT_DIR$/src/com/application/rss/read/RSSParser.java" />
+        <option value="$PROJECT_DIR$/src/com/application/App.java" />
+        <option value="$PROJECT_DIR$/src/style/style.css" />
+        <option value="$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java" />
       </list>
     </option>
   </component>
@@ -162,7 +171,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="-254" />
     <option name="y" value="-1080" />
     <option name="width" value="1920" />
@@ -184,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,9 +265,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -483,7 +492,8 @@
       <workItem from="1515299705929" duration="14762000" />
       <workItem from="1515358316833" duration="6277000" />
       <workItem from="1515367232414" duration="687000" />
-      <workItem from="1515411346019" duration="15616000" />
+      <workItem from="1515411346019" duration="16361000" />
+      <workItem from="1515467331257" duration="7960000" />
     </task>
     <task id="LOCAL-00001" summary="Update structure application.">
       <created>1514671435171</created>
@@ -639,30 +649,37 @@
       <option name="project" value="LOCAL" />
       <updated>1515431129749</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fixed more bugs.">
+      <created>1515442650534</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1515442650534</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169216000" />
+    <option name="totallyTimeSpent" value="177921000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-254" y="-1080" width="1920" height="1080" extended-state="0" />
+    <frame x="-254" y="-1080" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19951633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19860972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17974181" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31479642" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4764208" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1544196" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15654951" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -736,7 +753,8 @@
     <MESSAGE value="Fixed a bug where infinite searches for updates occurred." />
     <MESSAGE value="Yeah! Autoupdate!  Wait release :)" />
     <MESSAGE value="Optimization load time." />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimization load time." />
+    <MESSAGE value="Fixed more bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed more bugs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -749,31 +767,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/connection/Сonnection.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/news/GetNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/news/ParsNews.java" />
     <entry file="file://$PROJECT_DIR$/src/com/application/news/News.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -881,20 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/rss/model/Feed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/rss/tests/ReadTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/news/News.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -910,13 +889,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lang/SwitchLang.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/application/news/GetNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/function/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
@@ -925,25 +897,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/search/updates/ftp/Connect.java" />
-    <entry file="file://$PROJECT_DIR$/src/style/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ftp_connect/com/script/ftp/ftpConnect.py" />
     <entry file="file://$PROJECT_DIR$/src/python/launching/RunScript.java" />
     <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/config" />
     <entry file="file://$PROJECT_DIR$/src/ftp_connect/.idea/workspace.xml" />
-    <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1412">
-          <caret line="117" column="32" lean-forward="false" selection-start-line="117" selection-start-column="32" selection-end-line="117" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/Dialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -953,29 +910,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConfigConnect.java" />
     <entry file="file://$PROJECT_DIR$/src/com/application/server/ftp/connect/ConnectServer.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/application/news/FeedNews.java">
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/model/Feed.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="315">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSFeedParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="71" column="40" lean-forward="false" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+        <state relative-caret-position="774">
+          <caret line="117" column="20" lean-forward="true" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1539">
-          <caret line="69" column="48" lean-forward="false" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -989,13 +936,129 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/model/RSSFeed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding>
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/tests/ReadTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/model/RSSFeed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="34" lean-forward="true" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#581#582#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
+            <element signature="e#681#682#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#739#740#0" expanded="true" />
+            <element signature="e#770#771#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#904#905#0" expanded="true" />
+            <element signature="e#932#933#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/read/RSSParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="69" column="54" lean-forward="false" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/news/FeedNews.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+            <element signature="e#594#595#0" expanded="true" />
+            <element signature="e#622#623#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/news/GetNews.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/rss/model/RSSMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#144#145#0" expanded="true" />
+            <element signature="e#172#173#0" expanded="true" />
+            <element signature="e#203#204#0" expanded="true" />
+            <element signature="e#230#231#0" expanded="true" />
+            <element signature="e#268#269#0" expanded="true" />
+            <element signature="e#302#303#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+            <element signature="e#361#362#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#682#683#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/application/news/SaveNews.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
+        <state relative-caret-position="754">
           <caret line="76" column="59" lean-forward="false" selection-start-line="76" selection-start-column="59" selection-end-line="76" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,6 +1070,14 @@
             <element signature="e#2611#2612#0" expanded="true" />
             <element signature="e#2683#2684#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/application/action/event/ActionEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="123" column="20" lean-forward="false" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -10,8 +10,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -35,7 +38,7 @@ public class ActionEvent {
     // Action event for button on main window
     // Created window with news
 
-    public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText) {
+    public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText, Image portalImage) {
         btn.setOnAction((javafx.event.ActionEvent event) -> {
             if (WorkFile.checkFile()) {
                 try {
@@ -68,6 +71,17 @@ public class ActionEvent {
             toBack(back, newsStage);
             closeNewsWindow(newsStage);
 
+            if (portalImage != null) {
+                ImageView image = new ImageView(portalImage);
+                VBox vBox = new VBox();
+                vBox.setId("image-vbox");
+                vBox.getStylesheets().add(App.PATH_TO_STYLE);
+                vBox.setMaxSize(image.getFitWidth() + 30, image.getFitHeight() + 20);
+                vBox.setMinSize(image.getFitWidth() + 30, image.getFitHeight() + 20);
+                vBox.getChildren().add(image);
+                grid.add(vBox, 0, 0);
+            }
+
             ScrollPane originPane = new ScrollPane();
             originPane.setContent(grid);
             originPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -84,9 +98,9 @@ public class ActionEvent {
 
             try {
                 createObjects(grid, rssText.getText().substring(0,
-                        rssText.getText().indexOf(":/LINK/:")), newsStage);
+                        rssText.getText().indexOf(":/LINK/:")));
             } catch (StringIndexOutOfBoundsException e) {
-                createObjects(grid, rssText.getText(), newsStage);
+                createObjects(grid, rssText.getText());
                 try {
                     WorkFile.addRSSLink(rssText.getText());
                 } catch (IOException e1) {
@@ -98,17 +112,16 @@ public class ActionEvent {
     }
 
     // Create news-window
-    private static void createObjects(GridPane grid, String RSSLink, Stage primaryStage) {
+    private static void createObjects(GridPane grid, String RSSLink) {
 
         List<News> newsList = GetNews.getNews(RSSLink);
 
-        int i = 0;
-
-        i += 2;
+        int i = 3;
 
         for (News news : newsList) {
 
-            Text newsTitle = new Text(news.getTitle() + "\nОпубликовано: " + news.getDate());
+            Text newsTitle = new Text(news.getTitle() + "\nОпубликовано: " +
+                    news.getDate().substring(0, news.getDate().lastIndexOf(" ")));
             Platform.runLater(() -> {
                 newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
                 newsTitle.setWrappingWidth(width);

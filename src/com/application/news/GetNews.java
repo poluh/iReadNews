@@ -1,8 +1,8 @@
 package com.application.news;
 
-import com.application.rss.model.Feed;
-import com.application.rss.model.FeedMessage;
-import com.application.rss.read.RSSFeedParser;
+import com.application.rss.model.RSSFeed;
+import com.application.rss.model.RSSMessage;
+import com.application.rss.read.RSSParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ public class GetNews {
     public static List<News> getNews(String RSSLink) {
         List<News> newsList = new ArrayList<>();
 
-        RSSFeedParser parser = new RSSFeedParser(RSSLink);
-        Feed feed = parser.readFeed();
-        for (FeedMessage message : feed.getMessages()) {
+        RSSParser parser = new RSSParser(RSSLink);
+        RSSFeed feed = parser.readFeed();
+        for (RSSMessage message : feed.getMessages()) {
             newsList.add(new News(message.getTitle(), message.getDescription(),
                     message.getLink(), message.getDate()));
         }

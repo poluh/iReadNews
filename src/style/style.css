@@ -1,14 +1,16 @@
 .root {
-    -fx-background-color: whitesmoke;
+    -fx-background-color: white;
     -fx-border-radius: 50;
     -fx-arc-height: 50;
     -fx-arc-width: 50;
 }
 
-#scene {
-    -fx-background-color: whitesmoke;
-    -fx-border-radius: 50;
+#image-vbox {
+    -fx-background-color: white;
+    -fx-border-radius: 100;
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 5, 0, 0);
 }
+
 
 .label {
     -fx-opacity: 0.6;

@@ -1,23 +1,30 @@
 package com.application.news;
 
-import com.application.rss.model.Feed;
-import com.application.rss.read.RSSFeedParser;
+import com.application.rss.model.RSSFeed;
+import com.application.rss.read.RSSParser;
+import javafx.scene.image.Image;
 
 public class FeedNews {
 
-    private String titleString, pubDate;
+    private String title, link;
+    private Image image;
 
     public FeedNews(String RSSLink) {
-        Feed feed = new RSSFeedParser(RSSLink).readFeed();
-        this.titleString = feed.getTitle();
-        this.pubDate = feed.getPubDate();
+        RSSFeed feed = new RSSParser(RSSLink).readFeed();
+        this.title = feed.getTitle();
+        this.link = feed.getLink();
+        this.image = feed.getImage();
     }
 
-    public String getTitleString() {
-        return titleString;
+    public String getTitle() {
+        return title;
     }
 
-    public String getPubDate() {
-        return pubDate;
+    public String getLink() {
+        return link;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

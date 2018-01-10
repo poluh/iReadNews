@@ -4,6 +4,8 @@ import com.application.file.WorkFile;
 import javafx.scene.control.Alert;
 import java.io.*;
 import java.net.*;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.Arrays;
 
 public class SaveNews {
@@ -14,33 +16,19 @@ public class SaveNews {
         try {
             newsName = WorkFile.normalizedName(newsName);
 
-            URL PageUrl;
-            URLConnection GetConn;
-
-            PageUrl = new URL(newsLink);
-            GetConn = PageUrl.openConnection();
-            GetConn.connect();
-
-            InputStreamReader ReadIn = new InputStreamReader(GetConn.getInputStream());
-            BufferedReader BufData = new BufferedReader(ReadIn);
-            String htmlFileName = (SAVE_DIRECTORY + "/" + newsName + ".html");
-            FileWriter FWriter = new FileWriter(htmlFileName);
-            BufferedWriter BWriter = new BufferedWriter(FWriter);
-            String UrlData;
-            while ((UrlData = BufData.readLine()) != null) {
-                BWriter.write(UrlData);
-                BWriter.newLine();
-            }
-            BWriter.close();
+            URL news = new URL(newsLink);
+            ReadableByteChannel byteChannel = Channels.newChannel(news.openStream());
+            FileOutputStream savedFile = new FileOutputStream(SAVE_DIRECTORY + "/" + newsName + ".html");
+            savedFile.getChannel().transferFrom(byteChannel, 0, Long.MAX_VALUE);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("New saved!");
             alert.setContentText("Congratulations!\nNews saved!");
             alert.showAndWait();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Save error.");
-            alert.setContentText("Save error.\nSomething went wrong...");
+            alert.setContentText("Save error.\nSomething went wrong...\nLogs:\n" + ex.getMessage());
             alert.showAndWait();
         }
     }

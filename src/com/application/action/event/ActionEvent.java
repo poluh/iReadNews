@@ -5,6 +5,7 @@ import com.application.file.WorkFile;
 import com.application.news.GetNews;
 import com.application.news.News;
 import com.application.news.SaveNews;
+import com.application.tags.get.GetTags;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -129,6 +130,8 @@ public class ActionEvent {
 
             Text newsDescription = new Text(news.getDescription());
             newsDescription.setWrappingWidth(width);
+
+            GetTags.getTags(news.getDescription());
 
             Button newsDate = new Button(news.getDate());
             newsDate.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));

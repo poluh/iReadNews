@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -23,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.List;
 
 
@@ -227,6 +227,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         if (!WorkFile.checkFile()) {
             createStartWindow(primaryStage);
         } else {

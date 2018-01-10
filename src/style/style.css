@@ -1,8 +1,6 @@
 .root {
-    -fx-background-color: white;
-    -fx-border-radius: 50;
-    -fx-arc-height: 50;
-    -fx-arc-width: 50;
+    -fx-background-color: whitesmoke;
+    -fx-border-radius: 100;
 }
 
 #image-vbox {

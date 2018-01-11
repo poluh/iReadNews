@@ -5,6 +5,7 @@ import com.application.file.WorkFile;
 import com.application.news.GetNews;
 import com.application.news.News;
 import com.application.news.SaveNews;
+import com.application.settings.type.SettingAction;
 import com.application.tags.get.GetTags;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -36,8 +37,8 @@ public class ActionEvent {
     private static double height = 800;
 
 
-    // Action event for button on main window
-    // Created window with news
+    // Action event for button on main windows
+    // Created windows with news
 
     public static void buttonEvent(Button btn, Stage primaryStage, TextField rssText, Image portalImage) {
         btn.setOnAction((javafx.event.ActionEvent event) -> {
@@ -112,7 +113,7 @@ public class ActionEvent {
         });
     }
 
-    // Create news-window
+    // Create news-windows
     private static void createObjects(GridPane grid, String RSSLink) {
 
         List<News> newsList = GetNews.getNews(RSSLink);
@@ -131,7 +132,11 @@ public class ActionEvent {
             Text newsDescription = new Text(news.getDescription());
             newsDescription.setWrappingWidth(width);
 
-            GetTags.getTags(news.getDescription());
+            try {
+                GetTags.getTags(news.getDescription());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
 
             Button newsDate = new Button(news.getDate());
             newsDate.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -166,7 +171,7 @@ public class ActionEvent {
 
     }
 
-    // Active event for button "Add RSS" in subtract window and button "X"
+    // Active event for button "Add RSS" in subtract windows and button "X"
     public static void buttonEvent(Button button, TextField RSSLink, Stage primaryStage, String key) {
         button.setOnAction(event -> Platform.runLater(() -> {
             String text = RSSLink.getText();
@@ -276,6 +281,24 @@ public class ActionEvent {
             SaveNews.dellAllNews();
             primaryStage.close();
             toBack();
+        });
+    }
+
+    public static void eventSetting(Button button, String setName, String setSet, Stage primaryStage) {
+        button.setOnAction(event -> {
+            switch (setName) {
+                case "Theme":
+                    if (Objects.equals(setSet, "Standard")) {
+                        button.setText("Theme = Black");
+                        SettingAction.changeTheme('b');
+                    } else {
+                        button.setText("Theme = Standard");
+                        SettingAction.changeTheme('s');
+                    }
+
+                    App.createSettingWindow(primaryStage);
+
+            }
         });
     }
 

@@ -13,17 +13,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class App extends Application {
@@ -31,32 +36,40 @@ public class App extends Application {
     public static String PATH_TO_STYLE = "style/style.css";
     private static String PATH_TO_ICON = "style/book-open.png";
     private static Image ICON = new Image(PATH_TO_ICON);
+    public static boolean isApplicationRun = false;
+    private static Map<String, FeedNews> cacheFeedNews = new HashMap<>();
 
-    private static void createStartWindow(Stage primaryStage) {
-
-        primaryStage.setTitle("News");
-
+    private static GridPane createGrid() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+        return grid;
+    }
+
+    private static Scene createScene(GridPane grid) {
+        Scene scene = new Scene(grid, 400, 400);
+        scene.getStylesheets().add(PATH_TO_STYLE);
+        return scene;
+    }
+
+
+    private static void createStartWindow(Stage primaryStage) {
+
+        primaryStage.setTitle("News");
+
+        GridPane grid = createGrid();
 
         createObjects(grid, primaryStage);
 
-        Scene scene = new Scene(grid, 400, 400);
-        scene.getStylesheets().add(PATH_TO_STYLE);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(createScene(grid));
         primaryStage.show();
     }
 
     public static void createRSSLinksWindow(Stage primaryStage, List<String> file) {
 
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25));
+        GridPane grid = createGrid();
 
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -64,20 +77,14 @@ public class App extends Application {
         primaryStage.setTitle("Your RSS links.");
         primaryStage.getIcons().add(ICON);
 
-        Scene scene = new Scene(scrollPane, 350, 400);
-        scene.getStylesheets().add(PATH_TO_STYLE);
-
-        primaryStage.setScene(scene);
+        primaryStage.setScene(createScene(grid));
         primaryStage.show();
 
         createObjects(grid, primaryStage, file);
     }
 
     public static void createSavedPagesWindow(Stage primaryStage, List<String> savedNewsList) {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(15));
+        GridPane grid = createGrid();
 
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -85,25 +92,52 @@ public class App extends Application {
 
         Button back = new Button("Back to links");
         ActionEvent.toBack(back, primaryStage);
+        back.setId("button-toBack");
 
         StackPane root = new StackPane();
 
         root.getChildren().addAll(scrollPane, back);
         StackPane.setMargin(back, new Insets(50, 0, 400, 0));
 
-        Scene scene = new Scene(root, 350, 400);
-        scene.getStylesheets().add(PATH_TO_STYLE);
-
         primaryStage.setTitle("Your saved pages.");
         primaryStage.getIcons().add(ICON);
+
+        Scene scene = new Scene(root, 400, 400);
+        scene.getStylesheets().add(PATH_TO_STYLE);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
         createListOfButton(grid, primaryStage, savedNewsList);
+
     }
 
-    // This method created object for start window
+    public static void createSettingWindow(Stage primaryStage) {
+        GridPane grid = createGrid();
+
+        Button back = new Button("Back to windows");
+        HBox hBox = new HBox();
+        hBox.getChildren().add(back);
+        hBox.setAlignment(Pos.CENTER);
+        ActionEvent.toBack(back, primaryStage);
+
+        primaryStage.setTitle("Settings.");
+        primaryStage.getIcons().add(ICON);
+
+        grid.add(hBox, 0, 0);
+
+        primaryStage.setScene(createScene(grid));
+        primaryStage.show();
+
+        try {
+            createObject(grid, WorkFile.listSettings(), primaryStage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // This method created object for start windows
 
     private static void createObjects(GridPane grid, Stage primaryStage) {
 
@@ -140,7 +174,7 @@ public class App extends Application {
     }
 
 
-    // This methods created obj for base window, after added links RSS
+    // This methods created obj for base windows, after added links RSS
 
     private static void createObjects(GridPane grid, Stage primaryStage, List<String> RSSlinks) {
 
@@ -149,11 +183,29 @@ public class App extends Application {
         title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(title, 0, 0);
 
+        Button settings = new Button("?");
+        settings.setMinWidth(24);
+        settings.setOnAction(event -> createSettingWindow(primaryStage));
+        grid.add(settings, 1, 0);
+
         int i = 1;
         for (String link : RSSlinks) {
-            FeedNews feedNews = new FeedNews(link);
-            Button titlePortal = new Button(new FeedNews(link).getTitle());
+
+            FeedNews feedNews;
+            try {
+                if (cacheFeedNews.keySet().contains(link)) {
+                    feedNews = cacheFeedNews.get(link);
+                } else {
+                    feedNews = new FeedNews(link);
+                    cacheFeedNews.put(link, feedNews);
+                }
+            } catch (NullPointerException ignored) {
+                feedNews = new FeedNews(link);
+            }
+
+            Button titlePortal = new Button(feedNews.getTitle());
             TextField textField = new TextField(link + ":/LINK/:" + feedNews.getTitle());
+            titlePortal.setTextAlignment(TextAlignment.CENTER);
             titlePortal.setMinWidth(250);
             titlePortal.setMaxWidth(250);
             titlePortal.setWrapText(true);
@@ -162,7 +214,6 @@ public class App extends Application {
 
             Button delPortal = new Button("X");
             ActionEvent.buttonEvent(delPortal, new TextField(link), primaryStage, "0");
-
             grid.add(titlePortal, 0, i);
             grid.add(delPortal, 1, i);
             i++;
@@ -185,6 +236,7 @@ public class App extends Application {
 
     }
 
+    // Method created list button of saved news
     private static void createListOfButton(GridPane grid, Stage primaryStage, List<String> namesList) {
 
         int i = 3;
@@ -225,6 +277,24 @@ public class App extends Application {
         }
     }
 
+    // Method for created settings windows
+    private static void createObject(GridPane grid, List<String> settings, Stage primaryStage) {
+        int i = 1;
+        for (String setting : settings) {
+            // In setting two args = Name setting && self setting (setNameAndSetting)
+            String[] setNAS = setting.split(":");
+
+            Button set = new Button(setNAS[0] + " = " + setNAS[1]);
+            set.setMinWidth(350);
+            set.setId("button-setting");
+            HBox hBox = new HBox();
+            hBox.getChildren().add(set);
+            hBox.setAlignment(Pos.CENTER);
+            grid.add(hBox, 0, i);
+            ActionEvent.eventSetting(set, setNAS[0], setNAS[1], primaryStage);
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -239,7 +309,9 @@ public class App extends Application {
 
     public static void main(String[] args) throws IOException {
         CreateDirectory.createDirectory();
+        isApplicationRun = true;
         launch(args);
+        isApplicationRun = false;
     }
 
 }

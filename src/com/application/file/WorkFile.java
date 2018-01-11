@@ -16,6 +16,7 @@ public class WorkFile {
     private static final String FILE_NAME = "DataBase/RSSDataBase/RSSLinks.txt";
     private static final String BUFF_FILE = "DataBase/RSSDataBase/RSSLinkBUFF.txt";
     private static final String POPULAR_RSS = "DataBase/RSSDataBase/RSSPopularLinks.txt";
+    private static final String SETTINGS_FILE = "DataBase/settings.txt";
 
     public static boolean checkFile() {
         return (new File(FILE_NAME).exists());
@@ -59,6 +60,17 @@ public class WorkFile {
             answer.add(file.getName().replace(".html", "...").replace("-", " "));
         }
 
+        return answer;
+    }
+
+    public static List<String> listSettings() throws IOException {
+        List<String> answer = new ArrayList<>();
+        File set = new File(SETTINGS_FILE);
+
+        BufferedReader fin = new BufferedReader(new FileReader(set));
+        String line;
+
+        while ((line = fin.readLine()) != null) answer.add(line);
         return answer;
     }
 

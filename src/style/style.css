@@ -18,6 +18,33 @@
     -fx-effect: dropshadow(three-pass-box, #545454, 10, 0, 3.5, 3.5);
 }
 
+/*
+ * Setting-button CSS block
+ */
+
+#button-setting {
+    -fx-border-radius: 0;
+}
+
+#button-setting:hover {
+    -fx-border-radius: 0;
+}
+
+#button-setting:pressed, #button-setting:default:hover:pressed {
+    -fx-border-radius: 0;
+}
+
+#button-setting:focused {
+    -fx-border-radius: 0;
+}
+
+#button-setting:disabled, .button:default:disabled {
+    -fx-border-radius: 0;
+}
+/*
+ * Button-block close
+ */
+
 #button-up:pressed {
     -fx-border-color: #aaaaaa;
     -fx-background-color: #aaaaaa;

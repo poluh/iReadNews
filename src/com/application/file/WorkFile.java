@@ -78,11 +78,15 @@ public class WorkFile {
         File sourceFile = new File(FILE_NAME);
         File outputFile = new File(BUFF_FILE);
 
-        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+        changeFile(sourceFile, outputFile, delLink);
+    }
+
+    private static void changeFile(File SOURCE_FILE, File OUTPUT_FILE, String REWRITE_LINE) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(SOURCE_FILE));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE));
         String line;
         while ((line = reader.readLine()) != null) {
-            if (!line.equals(delLink)) {
+            if (!line.equals(REWRITE_LINE)) {
                 writer.write(line);
                 writer.newLine();
             }
@@ -90,8 +94,8 @@ public class WorkFile {
 
         reader.close();
         writer.close();
-        sourceFile.delete();
-        outputFile.renameTo(sourceFile);
+        SOURCE_FILE.delete();
+        OUTPUT_FILE.renameTo(SOURCE_FILE);
     }
 
     public static String normalizedName(String newsName) {
@@ -103,6 +107,10 @@ public class WorkFile {
         Arrays.stream(new File(SaveNews.SAVE_DIRECTORY).listFiles()).filter(file -> file.isFile() &&
                 Objects.equals(file.toString(),
                         SaveNews.SAVE_DIRECTORY + "/" + nameNews + ".html")).forEach(File::delete);
+
+    }
+
+    public static void changeSetting(String nameSet, String setSet) {
 
     }
 

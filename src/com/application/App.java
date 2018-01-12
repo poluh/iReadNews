@@ -285,11 +285,12 @@ public class App extends Application {
             String[] setNAS = setting.split(":");
 
             Button set = new Button(setNAS[0] + " = " + setNAS[1]);
-            set.setMinWidth(350);
+            set.setMinWidth(500);
             set.setId("button-setting");
             HBox hBox = new HBox();
             hBox.getChildren().add(set);
             hBox.setAlignment(Pos.CENTER);
+            hBox.setMinWidth(500);
             grid.add(hBox, 0, i);
             ActionEvent.eventSetting(set, setNAS[0], setNAS[1], primaryStage);
         }

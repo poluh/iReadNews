@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: whitesmoke;
+    -fx-background-color: #18222d;
     -fx-border-radius: 100;
 }
 
@@ -12,6 +12,7 @@
 
 .label {
     -fx-opacity: 0.6;
+    -fx-text-fill: white;
 }
 
 #button-toBack {
@@ -23,42 +24,23 @@
  */
 
 #button-setting {
-    -fx-border-color: #ededed;
-    -fx-border-radius: 00;
-    -fx-border-width: 1.5;
-    -fx-background-radius: 30;
-    -fx-background-color: #fafafa;
-    -fx-font-family: "Segoe UI", Helvetica, sans-serif;
-    -fx-text-fill: #02547D;
 }
 
 #button-setting:hover {
-    -fx-background-color: #0284A8;
-    -fx-border-color: #0284A8;
-    -fx-text-fill: #f5f5f5;
+
 }
 
-#button-setting:pressed, .button:default:hover:pressed {
-    -fx-background-color: white;
-    -fx-text-fill: #1d1d1d;
+#button-setting:pressed, #button-setting:default:hover:pressed {
+
 }
 
 #button-setting:focused {
-    -fx-border-color: #ededed;
-    -fx-border-radius: 0;
-    -fx-border-width: 2;
 }
 
 #button-setting:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
+
 }
 
-#button-setting:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
-}
 /*
  * Button-block close
  */
@@ -74,18 +56,24 @@
 }
 
 .button {
-    -fx-border-color: #ededed;
+    -fx-border-color: #283543;
     -fx-border-radius: 30;
     -fx-border-width: 1.5;
     -fx-background-radius: 30;
-    -fx-background-color: #fafafa;
+    -fx-background-color: #18222d;
     -fx-font-family: "Segoe UI", Helvetica, sans-serif;
-    -fx-text-fill: #02547D;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-border-color: #283543;
+    -fx-background-color: #18222d;
+    -fx-text-fill: white;
 }
 
 .button:hover {
-    -fx-background-color: #0284A8;
-    -fx-border-color: #0284A8;
+    -fx-background-color: #3c6996;
+    -fx-border-color: #3c6996;
     -fx-text-fill: #f5f5f5;
 }
 
@@ -95,7 +83,7 @@
 }
 
 .button:focused {
-    -fx-border-color: #ededed;
+    -fx-border-color: #283543;
     -fx-border-radius: 30;
     -fx-border-width: 2;
 }

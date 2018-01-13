@@ -7,16 +7,17 @@ import com.application.news.FeedNews;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -35,9 +36,10 @@ public class App extends Application {
 
     public static String PATH_TO_STYLE = "style/style.css";
     private static String PATH_TO_ICON = "style/book-open.png";
-    private static Image ICON = new Image(PATH_TO_ICON);
-    public static boolean isApplicationRun = false;
-    private static Map<String, FeedNews> cacheFeedNews = new HashMap<>();
+    private static Image ICON = new Image(PATH_TO_ICON); // not it
+    // Just in case
+    private static boolean isApplicationRun = false; // it
+    private static Map<String, FeedNews> cacheFeedNews = new HashMap<>(); // and not it
 
     private static GridPane createGrid() {
         GridPane grid = new GridPane();
@@ -47,6 +49,7 @@ public class App extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         return grid;
     }
+
 
     private static Scene createScene(GridPane grid) {
         Scene scene = new Scene(grid, 400, 400);
@@ -89,14 +92,16 @@ public class App extends Application {
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.getStylesheets().add(PATH_TO_STYLE);
 
         Button back = new Button("Back to links");
         ActionEvent.toBack(back, primaryStage);
         back.setId("button-toBack");
 
         StackPane root = new StackPane();
-
+        root.getStylesheets().add(PATH_TO_STYLE);
         root.getChildren().addAll(scrollPane, back);
+
         StackPane.setMargin(back, new Insets(50, 0, 400, 0));
 
         primaryStage.setTitle("Your saved pages.");
@@ -108,11 +113,10 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
         createListOfButton(grid, primaryStage, savedNewsList);
-
     }
 
+    // TODO All sorts of strangeness with imposing a background on other window... To finish later
     public static void createSettingWindow(Stage primaryStage) {
         GridPane grid = createGrid();
 
@@ -186,7 +190,8 @@ public class App extends Application {
         Button settings = new Button("?");
         settings.setMinWidth(24);
         settings.setOnAction(event -> createSettingWindow(primaryStage));
-        grid.add(settings, 1, 0);
+        // TODO You can poke, but so far useless (All that related to the settings)
+        //grid.add(settings, 1, 0);
 
         int i = 1;
         for (String link : RSSlinks) {
@@ -302,6 +307,7 @@ public class App extends Application {
         if (!WorkFile.checkFile()) {
             createStartWindow(primaryStage);
         } else {
+            System.out.println("fdsf = " + 2 + 2);
             List<String> RSSLinks = WorkFile.listRSSLinks("0");
             createRSSLinksWindow(primaryStage, RSSLinks);
         }

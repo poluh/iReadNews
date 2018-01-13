@@ -1,6 +1,13 @@
 .root {
     -fx-background-color: #18222d;
-    -fx-border-radius: 100;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+#root {
+    -fx-background-color: #18222d;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 
 #image-vbox {
@@ -16,7 +23,7 @@
 }
 
 #button-toBack {
-    -fx-effect: dropshadow(three-pass-box, #545454, 10, 0, 3.5, 3.5);
+    -fx-opacity: 0.5;
 }
 
 /*

@@ -1,21 +1,54 @@
 .root {
     -fx-background-color: whitesmoke;
-    -fx-border-radius: 100;
+    -fx-border-color: whitesmoke;
 }
 
 #image-vbox {
     -fx-background-color: white;
     -fx-border-radius: 100;
-    -fx-effect: dropshadow(three-pass-box, #ffffff, 10, 5, 0, 0);
 }
 
+.text-field {
+    -fx-border-color: #3c6996;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+}
+
+.scroll-pane {
+    -fx-background-color: whitesmoke;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-opacity: 0.3;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 30;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 30;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #3c6996;
+    -fx-background-radius: 30;
+}
 
 .label {
     -fx-opacity: 0.6;
 }
 
 #button-toBack {
-    -fx-effect: dropshadow(three-pass-box, #545454, 10, 0, 3.5, 3.5);
+    -fx-opacity: 0.9;
 }
 
 /*
@@ -59,6 +92,7 @@
     -fx-background-color: -fx-focus-color;
     -fx-text-fill: #ffffff;
 }
+
 /*
  * Button-block close
  */
@@ -74,11 +108,11 @@
 }
 
 .button {
-    -fx-border-color: #ededed;
+    -fx-border-color: rgba(2, 91, 131, 0.23);
     -fx-border-radius: 30;
     -fx-border-width: 1.5;
     -fx-background-radius: 30;
-    -fx-background-color: #fafafa;
+    -fx-background-color: whitesmoke;
     -fx-font-family: "Segoe UI", Helvetica, sans-serif;
     -fx-text-fill: #02547D;
 }
@@ -95,7 +129,7 @@
 }
 
 .button:focused {
-    -fx-border-color: #ededed;
+    -fx-border-color: rgba(2, 91, 131, 0.23);;
     -fx-border-radius: 30;
     -fx-border-width: 2;
 }
@@ -112,5 +146,4 @@
 }
 
 .button:default:hover {
-
 }

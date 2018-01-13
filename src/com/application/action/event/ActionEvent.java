@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -93,7 +94,6 @@ public class ActionEvent {
             root.getChildren().addAll(originPane, back);
 
             Scene scene = new Scene(root, width + 50, height);
-            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
             newsStage.setScene(scene);
             newsStage.show();
 
@@ -110,6 +110,7 @@ public class ActionEvent {
                 }
             }
 
+            scene.getStylesheets().addAll(App.PATH_TO_STYLE);
         });
     }
 
@@ -127,6 +128,10 @@ public class ActionEvent {
             Platform.runLater(() -> {
                 newsTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
                 newsTitle.setWrappingWidth(width);
+                HBox newsTitleBox = new HBox();
+                newsTitle.setId("title");
+
+                newsTitleBox.getChildren().add(newsTitle);
             });
 
             Text newsDescription = new Text(news.getDescription());
